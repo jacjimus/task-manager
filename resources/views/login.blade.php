@@ -25,7 +25,7 @@
     <div class="container">
         <div class="panel panel-default form-container">
             <div class="panel-body">
-                <form role="form" action='{{ url('/verify-user') }}' method='post'>
+                <form role="form" action='{{ url('/verifyuser') }}' method='post'>
                     <h3 class="text-center margin-xl-bottom">Tasks Manager</h3>
 
                     <div class="form-group text-center">

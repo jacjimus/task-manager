@@ -11,7 +11,7 @@ class AdminController extends Controller
         return view('login');
     }
     
-    public function verifyUser(Request $request){
+    public function auth(Request $request){
         if($request->isMethod('POST')){
             if(Auth::attempt([
                 'email' => $request->get('email'), 

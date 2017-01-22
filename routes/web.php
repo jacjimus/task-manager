@@ -42,6 +42,6 @@ Route::any('/create-emp', 'EmployeeController@create');
 
 Route::any('/save', 'EmployeeController@save');
 
-Route::any('/verify-user', 'AdminController@verifyUser');
+Route::any('/verifyuser', 'AdminController@auth');
 
 Route::any('/logout', 'AdminController@logout');
