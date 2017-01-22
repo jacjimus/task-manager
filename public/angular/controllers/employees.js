@@ -69,7 +69,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
         if (isConfirmDelete) {
             $http({
                 method: 'DELETE',
-                url: API_URL + 'employees/' + id
+                url: API_URL + 'employee-del/' + id
             }).
                     success(function(data) {
                         console.log(data);

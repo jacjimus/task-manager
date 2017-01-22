@@ -96,7 +96,7 @@
                                     <label for="dept" class="col-sm-3 control-label">Department</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="dept" name="dept" ng-model="employee.dept" ng-required="true"
-                                                ng-init="employee.dept = dept[0]" 
+                                                ng-init="employee.dept = dept[0]->id" 
                                                 ng-options="dept.name for dept in departments track by dept.id">
                                             <option value="">Select department</option>
                                         </select>
@@ -109,7 +109,7 @@
                                     <label for="role_id" class="col-sm-3 control-label">Employee Role</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="dept" name="role_id" ng-model="employee.role_id" ng-required="true"
-                                                ng-init="employee.dept = dept[0]" 
+                                                ng-init="employee.role_id = role[0]->id" 
                                                 ng-options="role.name for role in roles track by role.id">
                                             <option value="">Select role</option>
                                         </select>

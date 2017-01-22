@@ -26,6 +26,8 @@ Route::get('/employees', 'EmployeeController@index');
 
 Route::post('/employee-save', 'EmployeeController@store');
 
+Route::post('/employee-del', 'EmployeeController@destroy');
+
 Route::post('/employee-save/{id}', 'EmployeeController@update');
 
 Route::post('/departments', 'DepartmentsController@data');
