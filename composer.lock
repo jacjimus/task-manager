@@ -1,31 +1,4 @@
 
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Gist
-
-    @jacjimus
-
-1
-0
-
-    0
-
-jacjimus/task-manager
-Code
-Issues 0
-Pull requests 0
-Projects 0
-Wiki
-Pulse
-Graphs
-Settings
-task-manager/composer.lock
-2e9dbae an hour ago
-@jacjimus jacjimus Initial Task manager commit
-3530 lines (3529 sloc) 124 KB
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
