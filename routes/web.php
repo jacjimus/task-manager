@@ -24,9 +24,21 @@ Route::get('/dashboard', 'DashboardController@index');
 
 Route::get('/employees', 'EmployeeController@index');
 
+Route::post('/employee-save', 'EmployeeController@store');
+
+Route::post('/employee-save/{id}', 'EmployeeController@update');
+
+Route::post('/departments', 'DepartmentsController@data');
+
+Route::post('/roles', 'RolesController@data');
+
+Route::get('/data/{id?}', 'EmployeeController@data');
+
 Route::get('/edit-emp/{id}', ['edit-emp' => 'EmployeeController@edit']);
 
 Route::any('/create-emp', 'EmployeeController@create');
+
+Route::any('/save', 'EmployeeController@save');
 
 Route::any('/verify-user', 'AdminController@verifyUser');
 
