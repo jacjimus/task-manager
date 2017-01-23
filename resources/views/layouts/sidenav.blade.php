@@ -6,7 +6,7 @@
                             </a>
                             
                         </li>
-                        <li class="nav-dropdown {{{ (Request::is('employees') ? 'class=active open' : '') }}}">
+                        <li class="nav-dropdown {{{ (Request::is('employees') ? 'active open' : '') }}}">
                             <a href="#" title="Users">
                                 <i class="fa fa-lg fa-fw fa-user"></i> Access Control Manager
                             </a>
@@ -23,27 +23,23 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-dropdown">
+                        <li class="nav-dropdown {{{ (Request::is('task-categories') ? 'active open' : '') }}}">
                             <a href="#" title="Users">
                                 <i class="fa fa-lg fa-fw fa-tasks"></i> Tasks Manager
                                 <span class="label label-danger pull-right">New</span>
                             </a>
                             <ul class="nav-sub">
-                                <li>
-                                    <a href="/" title="Create task">
+                                <li class="{{{ (Request::is('task') ? 'active open' : '') }}}">
+                                    <a href="{{url('/task')}}" title="Create task">
                                         <i class="fa fa-fw fa-file"></i> Create Task
                                     </a>
                                 </li>
-                                <li>
+                                <li class="{{{ (Request::is('task-categories') ? 'active open' : '') }}}">
                                     <a href="{{url('/task-categories')}}" title="Task categories">
                                         <i class="fa fa-fw fa-caret-right"></i>Task categories
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="email-compose.html" title="Compose">
-                                        <i class="fa fa-fw fa-caret-right"></i> Compose
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li class="nav-dropdown">
