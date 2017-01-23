@@ -19,7 +19,7 @@ class AdminController extends Controller
                         ])){
                 return redirect('/dashboard');
             } else {
-                return redirect('/')->with('err', '<div class="alert alert-danger">Failed Login</div>');
+                return redirect('/')->with('err', '<div class="alert alert-danger">Incorrect Username/Password</div>');
             }
         }
         return redirect('/');
