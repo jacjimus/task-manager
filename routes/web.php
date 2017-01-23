@@ -21,26 +21,37 @@ Route::get('/', 'AdminController@login');
 Route::get('/login', 'AdminController@login');
 
 Route::get('/dashboard', 'DashboardController@index');
+// All routes related to Employees
+Route::any('/employees', 'EmployeeController@index');
 
-Route::get('/employees', 'EmployeeController@index');
+Route::get('/employee/{id?}', 'EmployeeController@data');
 
-Route::post('/employee-save', 'EmployeeController@store');
+Route::post('/employee', 'EmployeeController@store');
 
-Route::post('/employee-del', 'EmployeeController@destroy');
+Route::delete('/employee/{id}', 'EmployeeController@destroy');
 
-Route::post('/employee-save/{id}', 'EmployeeController@update');
+Route::post('/employee/{id}', 'EmployeeController@update');
 
 Route::post('/departments', 'DepartmentsController@data');
 
 Route::post('/roles', 'RolesController@data');
-
-Route::get('/data/{id?}', 'EmployeeController@data');
 
 Route::get('/edit-emp/{id}', ['edit-emp' => 'EmployeeController@edit']);
 
 Route::any('/create-emp', 'EmployeeController@create');
 
 Route::any('/save', 'EmployeeController@save');
+// All routes related to task categories
+
+Route::any('/task-categories', 'TaskCategoriesController@index');
+
+Route::get('/category/{id?}', 'TaskCategoriesController@data');
+
+Route::post('/category', 'TaskCategoriesController@store');
+
+Route::post('/category/{id}', 'TaskCategoriesController@update');
+
+Route::delete('/category/{id}', 'TaskCategoriesController@destroy');
 
 Route::any('/verifyuser', 'AdminController@auth');
 

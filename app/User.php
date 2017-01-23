@@ -52,4 +52,6 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasOne('App\Roles' , 'id' ,'role_id');
     }
+    
+    
 }

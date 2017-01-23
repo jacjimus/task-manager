@@ -1,23 +1,10 @@
 <nav >
-                    <h5 class="sidebar-header">Navigation</h5>
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="nav-dropdown {{{ (Request::is('dashboard') ? 'class=active' : '') }}}">
-                            <a href="#" title="Dashboards">
+                        <li class="{{{ (Request::is('dashboard') ? 'open active' : '') }}}">
+                            <a href="{{url('/dashboard')}}" title="Dashboards">
                                 <i class="fa fa-lg fa-fw fa-home"></i> Dashboards
                             </a>
-                            <ul class="nav-sub">
-                                <li class="{{{ (Request::is('dashboard') ? 'class=active open' : '') }}}">
-                                    <a href="{{url('/dashboard')}}" title="Dashboard">
-                                        <i class="fa fa-fw fa-caret-right"></i> Dashboard
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="analytics-overview.html" title="Analytics Overview">
-                                        <i class="fa fa-fw fa-caret-right"></i> Analytics Overview
-                                        <span class="label label-danger pull-right">New</span>
-                                    </a>
-                                </li>
-                            </ul>
+                            
                         </li>
                         <li class="nav-dropdown {{{ (Request::is('employees') ? 'class=active open' : '') }}}">
                             <a href="#" title="Users">
@@ -29,7 +16,7 @@
                                         <i class="fa fa-fw fa-caret-right"></i>Manage Departments 
                                     </a>
                                 </li>
-                                <li class="{{{ (Request::is('employees') ? 'class=active open' : '') }}}">
+                                <li class="{{{ (Request::is('employees') ? 'active open' : '') }}}">
                                     <a href="{{url('/employees')}}" title="Profile">
                                         <i class="fa fa-fw fa-caret-right"></i> Manage Employees
                                     </a>
@@ -43,13 +30,13 @@
                             </a>
                             <ul class="nav-sub">
                                 <li>
-                                    <a href="email-inbox.html" title="Create task">
+                                    <a href="/" title="Create task">
                                         <i class="fa fa-fw fa-file"></i> Create Task
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="email-message.html" title="Message">
-                                        <i class="fa fa-fw fa-caret-right"></i> Message
+                                    <a href="{{url('/task-categories')}}" title="Task categories">
+                                        <i class="fa fa-fw fa-caret-right"></i>Task categories
                                     </a>
                                 </li>
                                 <li>

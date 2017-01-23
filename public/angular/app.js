@@ -1,4 +1,4 @@
-var app = angular.module('employeeRecords', [] , function($interpolateProvider) {
+var app = angular.module('app', [] , function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     })

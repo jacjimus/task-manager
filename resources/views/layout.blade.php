@@ -37,7 +37,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle navbar-user" href="javascript:;">
                             <img class="img-circle" src="{{ url('/') }}/demo/images/profile.jpg">
-                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                                <span class="hidden-xs">{{ Auth::user()->first_name }}</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu pull-right-xs">
@@ -59,7 +59,7 @@
                 <div class="sidebar-profile">
                     <img class="img-circle profile-image" src="{{ url('/') }}/demo/images/profile.jpg">
                      <div class="profile-body">
-                        <h4>{{Auth::user()->name}}</h4>
+                        <h4>{{Auth::user()->first_name}}&nbsp;{{Auth::user()->last_name}}</h4>
 
                         <div class="sidebar-user-links">
                             <a class="btn btn-link btn-xs" href="{{url('/dashboard')}}" data-placement="bottom" data-toggle="tooltip" data-original-title="Profile"><i class="fa fa-user"></i></a>

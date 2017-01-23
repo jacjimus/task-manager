@@ -9,8 +9,8 @@
 <div class="page-subheading page-subheading-md">
     <ol class="breadcrumb">
         <li><a href="javascript:;">Dashboard</a></li>
-        <li><a href="javascript:;">Tables</a></li>
-        <li class="active"><a href="javascript:;">Data Tables</a></li>
+        <li><a href="javascript:;">ACL</a></li>
+        <li class="active"><a href="javascript:;">Employees</a></li>
     </ol>
 </div>
 <div class="page-heading page-heading-md">
@@ -22,7 +22,7 @@
     <div class="row">
     <div class="panel panel-default">
        
-        <div class="panel-body" ng-app="employeeRecords">
+        <div class="panel-body" ng-app="app">
             <div  ng-controller="employeesController">
 
             <!-- Table-to-load-the-data Part -->
@@ -68,7 +68,7 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control has-error" id="first_name" name="first_name" placeholder="First name" value="<%first_name%>" 
                                         ng-model="employee.first_name" ng-required="true">
-                                        <span class="help-inline" 
+                                        <span class="alert-danger" 
                                         ng-show="frmEmployees.first_name.$invalid && frmEmployees.first_name.$touched">First Name field is required</span>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control has-error" id="last_name" name="last_name" placeholder="Last name" value="<%last_name %>" 
                                         ng-model="employee.last_name" ng-required="true">
-                                        <span class="help-inline" 
+                                        <span class="alert-danger" 
                                         ng-show="frmEmployees.last_name.$invalid && frmEmployees.last_name.$touched">Last Name field is required</span>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                     <div class="col-sm-9">
                                         <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" value="<%email%>" 
                                         ng-model="employee.email" ng-required="true">
-                                        <span class="help-inline" 
+                                        <span class="alert-danger" 
                                         ng-show="frmEmployees.email.$invalid && frmEmployees.email.$touched">Valid Email field is required</span>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                                 ng-options="dept.name for dept in departments track by dept.id">
                                             <option value="">Select department</option>
                                         </select>
-                                    <span class="help-inline" 
+                                    <span class="alert-danger" 
                                         ng-show="frmEmployees.dept.$invalid && frmEmployees.dept.$touched">Department field is required</span>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                                 ng-options="role.name for role in roles track by role.id">
                                             <option value="">Select role</option>
                                         </select>
-                                    <span class="help-inline" 
+                                    <span class="alert-danger" 
                                         ng-show="frmEmployees.role_id.$invalid && frmEmployees.role_id.$touched">Role field is required</span>
                                     </div>
                                 </div>
@@ -133,11 +133,10 @@
   </div>
     @endcan
 @endsection
+
 <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-
-<script src="<?= asset('js/jquery.min.js') ?>"></script>
-<script src="<?= asset('js/bootstrap.min.js') ?>"></script>       
+      
 <!-- AngularJS Application Scripts -->
 <script type="text/javascript" src="<?= asset('angular/app.js') ?>"></script>
 <script type="text/javascript" src="<?= asset('angular/controllers/employees.js') ?>"></script>

@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
-class EmployeeController extends Controller
+class TasksController extends Controller
 {
-    
     public function __construct()
     {
         $this->middleware('auth');
@@ -85,8 +81,8 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy(Request $request , $id) {
-        $employee = User::find($id);
+    public function destroy(Request $request) {
+        $employee = User::find($request->input('id'));
 
         $employee->delete();
 

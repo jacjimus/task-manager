@@ -1,36 +1,26 @@
-app.controller('employeesController', function($scope, $http, API_URL) {
-    //retrieve employees listing from API
-    $http.get(API_URL + "employee")
+app.controller('taskcategoryController', function($scope, $http, API_URL) {
+    //retrieve categories listing from API
+    $http.get(API_URL + "category")
             .success(function(response) {
-                $scope.employees = response;
+                $scope.categories = response;
                 
             });
-     //retrieve departments listing from DB       
-    $http.post(API_URL + 'departments', {status: 1}).
-          success(function(data, status, headers, config) {
-            $scope.departments = data;
-        });
-        
-     //retrieve roles listing from DB       
-    $http.post(API_URL + 'roles', {status: 1}).
-          success(function(data2, status, headers, config) {
-            $scope.roles = data2;
-        });
+    
     //show modal form
     $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
-        //$scope.departments = 
+
         switch (modalstate) {
             case 'add':
-                $scope.form_title = "Add New Employee";
+                $scope.form_title = "Add New Task Category";
                 break;
             case 'edit':
-                $scope.form_title = "Employee Detail";
+                $scope.form_title = "Task category Detail";
                 $scope.id = id;
-                $http.get(API_URL + 'employee/' + id)
+                $http.get(API_URL + 'category/' + id)
                         .success(function(response) {
                             console.log(response);
-                            $scope.employee = response;
+                            $scope.cat = response;
                         });
                 break;
             default:
@@ -42,8 +32,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
 
     //save new record / update existing record
     $scope.save = function(modalstate, id) {
-        var url = API_URL + "employee";
-        
+        var url = API_URL + "category";
         //append employee id to the URL if the form is in edit mode
         if (modalstate === 'edit'){
             url += "/" + id;
@@ -52,7 +41,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
         $http({
             method: 'POST',
             url: url,
-            data: $.param($scope.employee),
+            data: $.param($scope.cat),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(response) {
             console.log(response);
@@ -69,7 +58,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
         if (isConfirmDelete) {
             $http({
                 method: 'DELETE',
-                url: API_URL + 'employee/' + id
+                url: API_URL + 'category/' + id
             }).
                     success(function(data) {
                         console.log(data);
