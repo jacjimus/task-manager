@@ -39,7 +39,8 @@ class TaskCategoriesController extends Controller
         $categ->created_by = Auth::user()->id;
         $categ->save();
 
-        return 'Task category record successfully created with id ' . $categ->id;
+         $request->session()->flash('alert-success', 'Task category was successful created!');
+  
     }
 
     /**
@@ -67,7 +68,7 @@ class TaskCategoriesController extends Controller
         $categ->created_by = Auth::user()->id;
         $categ->save();
 
-        return "Sucess updating Task category #" . $categ->id;
+        $request->session()->flash('alert-success', 'Task category was successful updated!');
     }
 
     /**
@@ -81,7 +82,7 @@ class TaskCategoriesController extends Controller
 
         $categ->delete();
 
-        return "Task catgory record successfully deleted #" . $request->input('id');
+        $request->session()->flash('alert-success', 'Task category was successful deleted!');
     }
 } 
 

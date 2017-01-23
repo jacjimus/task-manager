@@ -45,8 +45,8 @@ class EmployeeController extends Controller
         $employee->dept = $request->input('dept');
         $employee->password = Hash::make(str_random(8));
         $employee->save();
-
-        return 'Employee record successfully created with id ' . $employee->id;
+        $request->session()->flash('alert-success', 'User was successful added!');
+    
     }
 
     /**
@@ -75,8 +75,7 @@ class EmployeeController extends Controller
         $employee->role_id = $request->input('role_id');
         $employee->dept = $request->input('dept');
         $employee->save();
-
-        return "Sucess updating user #" . $employee->id;
+        $request->session()->flash('alert-success', 'User was successful updated!');
     }
 
     /**
@@ -90,7 +89,8 @@ class EmployeeController extends Controller
 
         $employee->delete();
 
-        return "Employee record successfully deleted #" . $request->input('id');
+        $request->session()->flash('alert-success', 'User was successful removed!');
+    
     }
 } 
 

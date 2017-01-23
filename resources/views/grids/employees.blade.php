@@ -21,7 +21,14 @@
 <div class="container-fluid-md">
     <div class="row">
     <div class="panel panel-default">
-       
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+            <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+            @endif
+            @endforeach
+        </div> <!-- end .flash-message -->
         <div class="panel-body" ng-app="app">
             <div  ng-controller="employeesController">
 
@@ -96,8 +103,8 @@
                                     <label for="dept" class="col-sm-3 control-label">Department</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="dept" name="dept" ng-model="employee.dept" ng-required="true"
-                                                ng-init="employee.dept = dept[0]->id" 
-                                                ng-options="dept.name for dept in departments track by dept.id">
+                                                ng-init="employee.dept='3'"
+                                                ng-options="dep.name for dep in departments track by dep.id">
                                             <option value="">Select department</option>
                                         </select>
                                     <span class="alert-danger" 
