@@ -5,11 +5,22 @@ app.controller('tasksController', function($scope, $http, API_URL) {
                 $scope.mytasks = response;
                 
             });
-     //retrieve current department       
-    $http.post(API_URL + 'my_department', {status: 1}).
+     //retrieve current task categories within your department       
+    $http.get(API_URL + 'category').
           success(function(data, status, headers, config) {
-            $scope.my_department = data;
+            $scope.categories = data;
         });
+     //retrieve employees within your department       
+    $http.get(API_URL + 'empdept').
+          success(function(data, status, headers, config) {
+            $scope.users = data;
+        });
+        //retrieve departments listing from DB       
+    $http.post(API_URL + 'departments', {status: 1}).
+          success(function(data, status, headers, config) {
+            $scope.departments = data;
+        });
+        
     //show modal form
     $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
@@ -17,14 +28,16 @@ app.controller('tasksController', function($scope, $http, API_URL) {
         switch (modalstate) {
             case 'add':
                 $scope.form_title = "Add New Task";
-                break;
+                $scope.state = 'new';
+                 break;
             case 'view':
                 $scope.form_title = "Task Details";
                 $scope.id = id;
                 $http.get(API_URL + 'task/' + id)
                         .success(function(response) {
                             console.log(response);
-                            $scope.cat = response;
+                            $scope.state = 'edit';
+                            $scope.task = response;
                         });
                 break;
             default:

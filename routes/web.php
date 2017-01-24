@@ -68,6 +68,8 @@ Route::delete('/task/{id}', 'TasksController@destroy');
 
 Route::post('/my_department', 'TasksController@my_dept');
 
+Route::get('/empdept', 'EmployeeController@empdept');
+
 Route::any('/verifyuser', 'AdminController@auth');
 
 Route::any('/logout', 'AdminController@logout');

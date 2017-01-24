@@ -5,7 +5,7 @@
 
 @section('content')
     
-    <div class="page-content">
+    <div class="page-content" ng-app='app' ng-controller="tasksController">
 <div class="page-subheading page-subheading-md">
     <ol class="breadcrumb">
         <li><a href="javascript:;">Dashboard</a></li>
@@ -15,15 +15,18 @@
 </div>
 <div class="page-heading page-heading-md">
     <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
     <h2 >Tasks</h2>
     </div>
-    <div class="col-md-6 text-right"><button id="btn-add" class="btn btn-success btn-sm" ng-click="toggle('add', 0)"><i class="fa fa-tasks">&nbsp;</i>Create task</button></div>
+    <div class="col-md-2">
+        <a href="{{url('/mytasks')}}" class="text-primary-dark"><i class="fa fa-tasks">&nbsp;</i>My tasks log</a> 
+    </div>
+    <div class="col-md-2 text-right"><button id="btn-add" class="btn btn-success btn-sm" ng-click="toggle('add', 0)"><i class="fa fa-plus-square">&nbsp;</i>Create task</button></div>
 </div>
 </div>
 
-<div class="container-fluid-md" ng-app='app'>
-    <div ng-controller="tasksController">
+<div class="container-fluid-md" >
+    <div >
     <div class="row">
     <div class="">
         <div class="flash-message">
@@ -162,12 +165,14 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <h4 class="modal-title" id="myModalLabel"><%form_title%></h4>
                         </div>
+                        
                         <div class="modal-body">
                             <form name="frmTasks" class="form-horizontal" novalidate="">
-                                <div class="form-group">
+                                <div ng-show="task.id != null"> 
+                                  <div class="form-group">
                                     <label for="status" class="col-sm-3 control-label">Task status</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" id="status" name="status" ng-model="mytask.status" ng-required="true"
+                                        <select class="form-control" id="status" name="status" ng-model="task.status" ng-required="true"
                                             <option value="">--Select--</option>
                                             <option value="New">New</option>
                                             <option value="On-going">On-going</option>
@@ -177,17 +182,95 @@
                                     <span class="alert-danger" 
                                         ng-show="frmTasks.status.$invalid && frmTasks.status.$touched">Status field is required</span>
                                     </div>
-                                </div>
-                                <div class="form-group error">
+                                   </div>
+                                    <div class="form-group error">
                                     <label for="comment" class="col-sm-3 control-label">Add comments</label>
                                     <div class="col-sm-9">
                                         <textarea  class="form-control autogrow has-error" id="comment" rows='4' name="comment" placeholder="comment here!" 
-                                                   ng-model="mytask.comment" ></textarea>
+                                                   ng-model="task.comment" ></textarea>
                                         <span class="alert-danger" 
                                         </div>
                                 </div>
+                                </div>
+                                </div>
                              
-
+                                <div ng-show="task.id == null"> 
+                                    <div class="form-group error">
+                                    <label for="description" class="col-sm-3 control-label">Task Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control has-error" id="description" name="description" placeholder="Task description" value="<%description%>" 
+                                        ng-model="task.description" ng-required="true">
+                                        <span class="alert-danger" 
+                                        ng-show="frmTasks.description.$invalid && frmTasks.description.$touched">description field is required</span>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="category_id" class="col-sm-3 control-label">Department</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="category_id" name="category_id" ng-model="task.category_id" ng-required="true"
+                                                ng-options="cat.name for cat in categories track by cat.id">
+                                            <option value="">Select category</option>
+                                        </select>
+                                    <span class="alert-danger" 
+                                        ng-show="frmTasks.category_id.$invalid && frmTasks.category_id.$touched">category field is required</span>
+                                    </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                    <label for="assignee" class="col-sm-3 control-label">Assignee</label>
+                                     <div class="col-sm-9">
+                                        <select class="form-control" id="category_id" name="category_id" ng-model="task.assignee" ng-required="true"
+                                                ng-options="user.fullname for user in users track by user.id">
+                                            <option value="">Select Assignee</option>
+                                        </select>
+                                    <span class="alert-danger" 
+                                        ng-show="frmTasks.assignee.$invalid && frmTasks.assignee.$touched">Assignee field is required</span>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="due_date" class="col-sm-3 control-label">Due date</label>
+                                    <div class="col-sm-9 date">
+                                        <input type="text" data-rel="datepicker" class="form-control has-error date" id="due_date" name="due_date" placeholder="format yyyy-mm-dd hh:mm:ss" value="<%due_date%>" 
+                                        ng-model="task.due_date" ng-required="true">
+                                        <span class="alert-danger" 
+                                        ng-show="frmTasks.due_date.$invalid && frmTasks.due_date.$touched">due date field is required</span>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="status" class="col-sm-3 control-label">Set task Priority status</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="priority" name="priority" ng-model="task.priority" ng-required="true"
+                                            <option value="">--Select--</option>
+                                            <option value="Low">Low</option>
+                                            <option value="Normal">Normal</option>
+                                            <option value="High">High</option>
+                                            </select>
+                                    <span class="alert-danger" 
+                                        ng-show="frmTasks.priority.$invalid && frmTasks.priority.$touched">priority field is required</span>
+                                    </div>
+                                   </div>
+                                    <div class="form-group">
+                                    <label for="notif_users" class="col-sm-3 control-label">Users to be notified</label>
+                                     <div class="col-sm-9">
+                                        <select class="form-control" id="notif_users" name="notif_users" ng-model="task.notif_users" multiple
+                                                ng-options="user.fullname for user in users track by user.id">
+                                            <option value="">Select User</option>
+                                        </select>
+                                    <span class="alert-danger" 
+                                        ng-show="frmTasks.assignee.$invalid && frmTasks.assignee.$touched">users field is required</span>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="notif_depts" class="col-sm-3 control-label">Dept to be notified</label>
+                                     <div class="col-sm-9">
+                                        <select class="form-control" id="notif_depts" name="notif_depts" ng-model="task.notif_depts" multiple
+                                                ng-options="dept.name for dept in departments track by dept.id">
+                                            <option value="">Select dept</option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                </div>
+                               
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -198,7 +281,8 @@
             </div>
     </div>
   </div>
-  
+</div>  
+</div>
 @endsection
 
 <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->

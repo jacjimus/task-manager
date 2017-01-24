@@ -11,7 +11,7 @@
 
         <script src="{{ url('/') }}/dist/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
         <script src="{{ url('/') }}/dist/assets/plugins/jquery-jvectormap/maps/world_mill_en.js"></script>
-
+        
         <!--[if gte IE 9]>-->
         <script src="{{ url('/') }}/dist/assets/plugins/rickshaw/js/vendor/d3.v3.js"></script>
         <script src="{{ url('/') }}/dist/assets/plugins/rickshaw/rickshaw.min.js"></script>

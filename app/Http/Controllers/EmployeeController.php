@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 class EmployeeController extends Controller
 {
     
@@ -24,10 +24,15 @@ class EmployeeController extends Controller
     public function data($id = null)
     {
      if ($id == null) {
-            return User::orderBy('id', 'asc')->with('department' , 'role')->get();
+            return User::orderBy('first_name', 'asc')->with('department' , 'role')->get();
         } else {
             return $this->show($id);
         }
+    }
+    public function empdept()
+    {
+     return User::select(['id' , DB::raw("CONCAT(`first_name`,' ',`last_name`) AS fullname"), 'dept'])->where('dept' , Auth::user()->dept)->get();
+        
     }
      /**
      * Store a newly created resource in storage.
