@@ -4,7 +4,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    @can('isHOD')
     <div class="page-content">
 <div class="page-subheading page-subheading-md">
     <ol class="breadcrumb">
@@ -90,7 +89,6 @@
     </div>
     </div>
   </div>
-    @endcan
 @endsection
 
 <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->

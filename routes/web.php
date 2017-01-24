@@ -52,6 +52,21 @@ Route::post('/category', 'TaskCategoriesController@store');
 Route::post('/category/{id}', 'TaskCategoriesController@update');
 
 Route::delete('/category/{id}', 'TaskCategoriesController@destroy');
+// All routes related to tasks
+
+Route::any('/tasks', 'TasksController@index');
+
+Route::get('/task/{id?}', 'TasksController@data');
+
+Route::get('/mydata', 'TasksController@mydata');
+
+Route::post('/task', 'TasksController@store');
+
+Route::post('/task/{id}', 'TasksController@update');
+
+Route::delete('/task/{id}', 'TasksController@destroy');
+
+Route::post('/my_department', 'TasksController@my_dept');
 
 Route::any('/verifyuser', 'AdminController@auth');
 

@@ -26,11 +26,10 @@
                         <li class="nav-dropdown {{{ (Request::is('task-categories') ? 'active open' : '') }}}">
                             <a href="#" title="Users">
                                 <i class="fa fa-lg fa-fw fa-tasks"></i> Tasks Manager
-                                <span class="label label-danger pull-right">New</span>
-                            </a>
+                                                            </a>
                             <ul class="nav-sub">
                                 <li class="{{{ (Request::is('task') ? 'active open' : '') }}}">
-                                    <a href="{{url('/task')}}" title="Create task">
+                                    <a href="{{url('/tasks')}}" title="Create task">
                                         <i class="fa fa-fw fa-file"></i> Create Task
                                     </a>
                                 </li>
