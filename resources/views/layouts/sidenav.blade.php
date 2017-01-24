@@ -12,8 +12,13 @@
                             </a>
                             <ul class="nav-sub">
                                 <li>
-                                    <a href="pages-members.html" title="Members">
+                                    <a href="{{url('/departments')}}" title="Departments">
                                         <i class="fa fa-fw fa-caret-right"></i>Manage Departments 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{url('/roles')}}" title="Roles">
+                                        <i class="fa fa-fw fa-caret-right"></i>Manage Roles 
                                     </a>
                                 </li>
                                 <li class="{{{ (Request::is('employees') ? 'active open' : '') }}}">
@@ -23,14 +28,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-dropdown {{{ (Request::is('task-categories') ? 'active open' : '') }}}">
+                        <li class="nav-dropdown {{{ (Request::is('tasks') ? 'active open' : '') }}}">
                             <a href="#" title="Users">
                                 <i class="fa fa-lg fa-fw fa-tasks"></i> Tasks Manager
                                                             </a>
                             <ul class="nav-sub">
                                 <li class="{{{ (Request::is('task') ? 'active open' : '') }}}">
                                     <a href="{{url('/tasks')}}" title="Create task">
-                                        <i class="fa fa-fw fa-file"></i> Create Task
+                                        <i class="fa fa-fw fa-caret-right"></i> All Tasks
                                     </a>
                                 </li>
                                 <li class="{{{ (Request::is('task-categories') ? 'active open' : '') }}}">
@@ -48,44 +53,15 @@
                             <ul class="nav-sub">
                                 <li>
                                     <a href="ui-typography.html" title="Typography">
-                                        <i class="fa fa-fw fa-caret-right"></i> Typography
+                                        <i class="fa fa-fw fa-caret-right"></i> Daily reports
                                     </a>
                                 </li>
                                 <li>
                                     <a href="ui-buttons.html" title="Buttons">
-                                        <i class="fa fa-fw fa-caret-right"></i> Buttons
+                                        <i class="fa fa-fw fa-caret-right"></i> Weekly Reports
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="ui-panels.html" title="Panels">
-                                        <i class="fa fa-fw fa-caret-right"></i> Panels
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ui-tabs-accordions.html" title="Tabs & Accordions">
-                                        <i class="fa fa-fw fa-caret-right"></i> Tabs & Accordions
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ui-tooltips-popovers.html" title="Tooltips & Popovers">
-                                        <i class="fa fa-fw fa-caret-right"></i> Tooltips & Popovers
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ui-alerts.html" title="Alerts">
-                                        <i class="fa fa-fw fa-caret-right"></i> Alerts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ui-components.html" title="Components">
-                                        <i class="fa fa-fw fa-caret-right"></i> Components
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ui-icons.html" title="Icons">
-                                        <i class="fa fa-fw fa-caret-right"></i> Icons
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </li>
                         

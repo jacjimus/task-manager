@@ -18,13 +18,13 @@
                 <div class="panel-body panel-body-primary">
                     <div class="metric-content metric-icon">
                         <div class="value">
-                            $2,154
+                            2,154
                         </div>
                         <div class="icon">
-                            <i class="fa fa-trophy"></i>
+                            <i class="fa fa-tasks"></i>
                         </div>
                         <header>
-                            <h3 class="thin">Today's Earnings</h3>
+                            <h3 class="thin">Today's pending taks</h3>
                         </header>
                     </div>
                 </div>
@@ -38,10 +38,10 @@
                             3,958
                         </div>
                         <div class="icon">
-                            <i class="fa fa-users"></i>
+                            <i class="fa fa-comment-o"></i>
                         </div>
                         <header>
-                            <h3 class="thin">Total Visitors</h3>
+                            <h3 class="thin">Total completed Tasks</h3>
                         </header>
                     </div>
                 </div>
@@ -52,13 +52,13 @@
                 <div class="panel-body panel-body-inverse">
                     <div class="metric-content metric-icon">
                         <div class="value">
-                            23.1%
+                            79.1%
                         </div>
                         <div class="icon">
-                            <i class="fa fa-chain-broken"></i>
+                            <i class="fa fa-compress"></i>
                         </div>
                         <header>
-                            <h3 class="thin">Bounce Rate</h3>
+                            <h3 class="thin">Task Completion Rate</h3>
                         </header>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
                 <div class="panel-body panel-body-danger">
                     <div class="metric-content metric-icon">
                         <div class="value">
-                            3:17
+                            12:17
                         </div>
                         <div class="icon">
                             <i class="fa fa-tags"></i>
                         </div>
                         <header>
-                            <h3 class="thin">Avg. Time on Site</h3>
+                            <h3 class="thin">Avg. Time on task</h3>
                         </header>
                     </div>
                 </div>
@@ -91,11 +91,11 @@
                     </div>
                     <div class="col-sm-5 col-md-4 no-padding">
                         <div class="panel-body bg-gray-dark" style="height: inherit;">
-                            <h4 class="thin text-white no-margin-top">Monthly Sales</h4>
+                            <h4 class="thin text-white no-margin-top">Monthly average Tasks</h4>
                             <table class="table table-condensed text-light">
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">USA</a>
+                                        <a href="javascript:;" class="text-light">Software Department</a>
                                     </td>
                                     <td>
                                         550
@@ -103,7 +103,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">China</a>
+                                        <a href="javascript:;" class="text-light">UI Design Department</a>
                                     </td>
                                     <td>
                                         420
@@ -111,7 +111,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">UK</a>
+                                        <a href="javascript:;" class="text-light">Software Testing</a>
                                     </td>
                                     <td>
                                         400
@@ -119,7 +119,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">India</a>
+                                        <a href="javascript:;" class="text-light">Sales & Marketting</a>
                                     </td>
                                     <td>
                                         290
@@ -127,7 +127,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">Australia</a>
+                                        <a href="javascript:;" class="text-light">Management</a>
                                     </td>
                                     <td>
                                         200
@@ -135,7 +135,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">France</a>
+                                        <a href="javascript:;" class="text-light">Customer Service</a>
                                     </td>
                                     <td>
                                         149
@@ -143,7 +143,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" class="text-light">Canada</a>
+                                        <a href="javascript:;" class="text-light">Desing and QA</a>
                                     </td>
                                     <td>
                                         100
@@ -173,8 +173,8 @@
                             <div class="mini-chart text-left">
                                 <div id="mini-chart-2" class="chart" style="width: 44px;"></div>
                                 <div class="chart-details" style="width: 79px;">
-                                    <div class="chart-name">Avg Outcome</div>
-                                    <div class="chart-value">$1,431,250</div>
+                                    <div class="chart-name">Avg Perfomance</div>
+                                    <div class="chart-value">50%</div>
                                 </div>
                             </div>
                         </div>
@@ -182,8 +182,8 @@
                             <div class="mini-chart text-left">
                                 <div id="mini-chart-3" class="chart" style="width: 44px;"></div>
                                 <div class="chart-details" style="width: 79px;">
-                                    <div class="chart-name">Total Sales</div>
-                                    <div class="chart-value">$261,885</div>
+                                    <div class="chart-name">Customer Tickets</div>
+                                    <div class="chart-value">61,885</div>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                         </div>
                         <div id="metric-sales" class="chart"></div>
                         <header>
-                            <h3 class="thin">Total Sales</h3>
+                            <h3 class="thin">Total tasks</h3>
                         </header>
                     </div>
                 </div>
@@ -225,14 +225,14 @@
                         </div>
                         <div id="metric-orders" class="chart"></div>
                         <header>
-                            <h3 class="thin">Total Orders</h3>
+                            <h3 class="thin">Total completed tasks</h3>
                         </header>
                     </div>
                 </div>
             </div>
             <div class="panel" style="overflow: hidden;">
                 <div class="panel-body">
-                    <h4 class="thin no-margin-top">Last Orders</h4>
+                    <h4 class="thin no-margin-top">Last taks</h4>
                     <table class="table">
                         <tbody>
                         <tr>
