@@ -84,13 +84,18 @@ class TasksController extends Controller
      * @return Response
      */
     public function store(Request $request) {
-        $categ = new Tasks;
-        $categ->name = $request->input('name');
-        $categ->dept_id = Auth::user()->dept;
-        $categ->created_by = Auth::user()->id;
-        $categ->save();
+        $task = new Tasks;
+        $task->description = $request->input('description');
+        $task->category_id = $request->input('category_id');
+        $task->status = Tasks::STATUS_NEW;
+        $task->assignee = $request->input('assignee');
+        $task->due_date = $request->input('due_date');
+        $task->priority = $request->input('priority');
+        $task->notif_users = serialize($request->input('notif_users'));
+        $task->notif_depts = serialize($request->input('notif_depts'));
+        $task->save();
 
-         $request->session()->flash('alert-success', 'Task category was successful created!');
+         $request->session()->flash('alert-success', 'Task  was successful created!');
   
     }
 

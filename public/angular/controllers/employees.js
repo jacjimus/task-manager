@@ -19,7 +19,6 @@ app.controller('employeesController', function($scope, $http, API_URL) {
     //show modal form
     $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
-        //$scope.departments = 
         switch (modalstate) {
             case 'add':
                 $scope.form_title = "Add New Employee";
@@ -31,6 +30,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
                         .success(function(response) {
                             console.log(response);
                             $scope.employee = response;
+                         
                         });
                 break;
             default:
@@ -52,7 +52,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
         $http({
             method: 'POST',
             url: url,
-            data: $.param($scope.employee),
+            data: $.param($scope.employee, $scope.dept),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(response) {
             console.log(response);

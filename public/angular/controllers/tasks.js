@@ -21,6 +21,7 @@ app.controller('tasksController', function($scope, $http, API_URL) {
             $scope.departments = data;
         });
         
+        
     //show modal form
     $scope.toggle = function(modalstate, id) {
         $scope.modalstate = modalstate;
@@ -54,11 +55,10 @@ app.controller('tasksController', function($scope, $http, API_URL) {
         if (modalstate === 'view'){
             url += "/" + id;
         }
-        
         $http({
             method: 'POST',
             url: url,
-            data: $.param($scope.mytask),
+            data: $.param($scope.task),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(response) {
             console.log(response);

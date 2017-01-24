@@ -172,9 +172,9 @@
                                   <div class="form-group">
                                     <label for="status" class="col-sm-3 control-label">Task status</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" id="status" name="status" ng-model="task.status" ng-required="true"
+                                        <select class="form-control" id="status" name="status" ng-model="task.status" 
                                             <option value="">--Select--</option>
-                                            <option value="New">New</option>
+                                            <option value="New" >New</option>
                                             <option value="On-going">On-going</option>
                                             <option value="Complete">complete</option>
                                             <option value="Dew">Dew</option>
@@ -183,7 +183,7 @@
                                         ng-show="frmTasks.status.$invalid && frmTasks.status.$touched">Status field is required</span>
                                     </div>
                                    </div>
-                                    <div class="form-group error">
+                                    <div class="form-group error" ng-if="task.status == 'On-going'">
                                     <label for="comment" class="col-sm-3 control-label">Add comments</label>
                                     <div class="col-sm-9">
                                         <textarea  class="form-control autogrow has-error" id="comment" rows='4' name="comment" placeholder="comment here!" 
@@ -205,7 +205,7 @@
                                     </div>
                                     </div>
                                     <div class="form-group">
-                                    <label for="category_id" class="col-sm-3 control-label">Department</label>
+                                    <label for="category_id" class="col-sm-3 control-label">Task category</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="category_id" name="category_id" ng-model="task.category_id" ng-required="true"
                                                 ng-options="cat.name for cat in categories track by cat.id">
@@ -257,7 +257,7 @@
                                             <option value="">Select User</option>
                                         </select>
                                     <span class="alert-danger" 
-                                        ng-show="frmTasks.assignee.$invalid && frmTasks.assignee.$touched">users field is required</span>
+                                        ng-show="frmTasks.notif_users.$invalid && frmTasks.notif_users.$touched">users field is required</span>
                                     </div>
                                     </div>
                                     <div class="form-group">

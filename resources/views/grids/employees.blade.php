@@ -102,9 +102,9 @@
                                 <div class="form-group">
                                     <label for="dept" class="col-sm-3 control-label">Department</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" id="dept" name="dept" ng-model="employee.dept" ng-required="true"
-                                                ng-init="employee.dept='3'"
-                                                ng-options="dep.name for dep in departments track by dep.id">
+                     
+                                        <select class="form-control" id="dept" name="dept" ng-model="employee.dept"  ng-required="true"
+                                                ng-options="dep.id as dep.name for dep in departments">
                                             <option value="">Select department</option>
                                         </select>
                                     <span class="alert-danger" 
@@ -116,8 +116,7 @@
                                     <label for="role_id" class="col-sm-3 control-label">Employee Role</label>
                                     <div class="col-sm-9">
                                         <select class="form-control" id="dept" name="role_id" ng-model="employee.role_id" ng-required="true"
-                                                ng-init="employee.role_id = role[0]->id" 
-                                                ng-options="role.name for role in roles track by role.id">
+                                                ng-options="role.id as role.name for role in roles">
                                             <option value="">Select role</option>
                                         </select>
                                     <span class="alert-danger" 
@@ -141,7 +140,7 @@
 @endsection
 
 <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
       
 <!-- AngularJS Application Scripts -->
 <script type="text/javascript" src="<?= asset('angular/app.js') ?>"></script>
