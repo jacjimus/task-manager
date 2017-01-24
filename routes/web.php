@@ -56,7 +56,11 @@ Route::delete('/category/{id}', 'TaskCategoriesController@destroy');
 
 Route::any('/tasks', 'TasksController@index');
 
+Route::any('/ongoing-tasks', 'TasksController@ongoing');
+
 Route::get('/task/{id?}', 'TasksController@data');
+
+Route::get('/comments/{id?}', 'TasksController@comments');
 
 Route::get('/mydata', 'TasksController@mydata');
 
@@ -65,6 +69,8 @@ Route::post('/task', 'TasksController@store');
 Route::post('/task/{id}', 'TasksController@update');
 
 Route::delete('/task/{id}', 'TasksController@destroy');
+
+Route::post('/close/{id}', 'TasksController@close');
 
 Route::post('/my_department', 'TasksController@my_dept');
 

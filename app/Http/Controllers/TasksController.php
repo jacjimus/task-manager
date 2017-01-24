@@ -17,6 +17,11 @@ class TasksController extends Controller
     {
           return view('grids.tasks');
     }
+    
+    public function ongoing()
+    {
+          return view('grids.myongoingtasks');
+    }
     public function my_dept()
     {
           return \App\Departments::find(Auth::user()->dept)->name;
@@ -28,14 +33,23 @@ class TasksController extends Controller
               * Access for my tasks
               *  -  Should be able to view all tasks assigned to self
               */
-            return Tasks::orderBy('created_on', 'desc')
+            return Tasks::orderBy('created_at', 'desc')
                     ->with('category', 'user')
                  ->where('assignee' , Auth::user()->id)
                  ->where('status' , Tasks::STATUS_NEW)
+                 ->orWhere('status' , Tasks::STATUS_ON_GOING)
                  ->get();
          } else {
             return $this->show($id);
         }
+    }
+    
+    public function comments($id = null)
+    {
+     return \App\TaskComments::orderBy('created_at', 'desc')
+                 ->where('task_id' , $id)
+                 ->get();
+         
     }
     public function data($id = null)
     {
@@ -90,6 +104,10 @@ class TasksController extends Controller
         $task->status = Tasks::STATUS_NEW;
         $task->assignee = $request->input('assignee');
         $task->due_date = $request->input('due_date');
+        $task->created_by = Auth::user()->id;
+        $task->notif_users_status = 0;
+        $task->notif_dept_status = 0;
+        $task->created_by = Auth::user()->id;
         $task->priority = $request->input('priority');
         $task->notif_users = serialize($request->input('notif_users'));
         $task->notif_depts = serialize($request->input('notif_depts'));
@@ -109,6 +127,13 @@ class TasksController extends Controller
         return Tasks::find($id);
     }
 
+    public function close(Request $request, $id) {
+        $task = Tasks::find($id);
+
+        $task->status = Tasks::STATUS_COMPLETE;
+        $task->save();
+        $request->session()->flash('alert-success', 'Task was successful closed!');
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -137,11 +162,11 @@ class TasksController extends Controller
      * @return Response
      */
     public function destroy(Request $request, $id) {
-        $categ = TaskCategories::find($id);
+        $categ = Tasks::find($id);
 
         $categ->delete();
 
-        $request->session()->flash('alert-success', 'Task category was successful deleted!');
+        $request->session()->flash('alert-success', 'Task was successful deleted!');
     }
 } 
 

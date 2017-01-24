@@ -5,6 +5,11 @@ app.controller('tasksController', function($scope, $http, API_URL) {
                 $scope.mytasks = response;
                 
             });
+     //retrieve current department       
+    $http.post(API_URL + 'my_department', {status: 1}).
+          success(function(data, status, headers, config) {
+            $scope.my_department = data;
+        });
      //retrieve current task categories within your department       
     $http.get(API_URL + 'category').
           success(function(data, status, headers, config) {
@@ -29,23 +34,55 @@ app.controller('tasksController', function($scope, $http, API_URL) {
         switch (modalstate) {
             case 'add':
                 $scope.form_title = "Add New Task";
-                $scope.state = 'new';
+                $('#myModal').modal('show');
                  break;
+            case 'history':
+                $scope.form_title = "Task comments";
+                $scope.id = id;
+                $http.get(API_URL + 'comments/' + id)
+                        .success(function(response) {
+                            console.log(response);
+                            $scope.comments = response;
+                        });
+                $('#comments').modal('show');
+                break;
             case 'view':
                 $scope.form_title = "Task Details";
                 $scope.id = id;
                 $http.get(API_URL + 'task/' + id)
                         .success(function(response) {
                             console.log(response);
-                            $scope.state = 'edit';
                             $scope.task = response;
                         });
+             $('#myModal').modal('show');
                 break;
+                
+            case 'close':
+            $scope.id = id;
+            var isConfirmClose = confirm('Are you sure you want to flag this task as Complete?');
+        if (isConfirmClose) {
+            $http({
+                method: 'POST',
+                url: API_URL + 'close/' + id
+            }).
+                    success(function(data) {
+                        console.log(data);
+                        location.reload();
+                    }).
+                    error(function(data) {
+                        console.log(data);
+                        alert('Unable to close');
+                    });
+        } else {
+            return false;
+        }
+        break;
             default:
+                location.reload();
                 break;
         }
         console.log(id);
-        $('#myModal').modal('show');
+        
     }
 
     //save new record / update existing record

@@ -10,18 +10,18 @@
     <ol class="breadcrumb">
         <li><a href="javascript:;">Dashboard</a></li>
         <li><a href="javascript:;">Tasks Manager</a></li>
-        <li class="active"><a href="javascript:;">Tasks</a></li>
+        <li class="active"><a href="javascript:;">My ongoing Tasks</a></li>
     </ol>
 </div>
 <div class="page-heading page-heading-md">
     <div class="row">
     <div class="col-md-8">
-    <h2 >Tasks</h2>
+    <h2 >My On-going Tasks</h2>
     </div>
     <div class="col-md-2">
-        <a href="#" class="text-primary-dark"><i class="fa fa-tasks">&nbsp;</i>Completed tasks</a> 
+        <a href="{{url('/tasks')}}" class="text-primary-dark"><i class="fa fa-caret-left">&nbsp;</i>Back to task listing</a> 
     </div>
-    <div class="col-md-2 text-right"><button id="btn-add" class="btn btn-success btn-sm" ng-click="toggle('add', 0)"><i class="fa fa-plus-square">&nbsp;</i>Create task</button></div>
+    <div class="col-md-2 text-right"></div>
 </div>
 </div>
 
@@ -41,8 +41,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">My New / Ongoing Tasks <code>[Assigned to Me]</code></h4>
-
+                    
                     <p>Tasks listing in order of <code>priority</code> and <code>due date</code></p>
 
                     <div class="panel-options">
@@ -72,11 +71,7 @@
                                 <td><% mytask.access_level %></td>
                                 <td><% mytask.created_at %></td>
                                 <td><% mytask.priority %></td>
-                                <td style="font-size: 13px;">
-                                    <a href="#" title="Add task comments" ng-click="toggle('view', mytask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
-                                    <a href="#" title="Task history" ng-click="toggle('history', mytask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
-                                    <a href="#" title="Close task" ng-click="toggle('close', mytask.id)"><i class="fa fa-bell text-danger"></i>&nbsp;
-                                    </a>
+                                <td><button class="btn btn-success btn-xs btn-detail" ng-click="toggle('view', mytask.id)">View</button>
                             </td>
                             </tr>
                             
@@ -87,78 +82,8 @@
         </div>
             </div>
         <div class="row">
-        @can('isHOD')
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Department <code>[<%my_department%>]</code> Tasks</h4>
-                    <p>All tasks in Department that I head
-
-                    <div class="panel-options">
-                        <a href="#" data-rel="collapse"><i class="fa fa-fw fa-minus"></i></a>
-                        <a href="#" data-rel="reload"><i class="fa fa-fw fa-refresh"></i></a>
-                        <a href="#" data-rel="close"><i class="fa fa-fw fa-times"></i></a>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <tr style="font-size: 11px;">
-                                <th>Due date</th>
-                                <th>Desc</th>
-                                <th>Create date</th>
-                                <th>Priority</th>
-                                <th>Username</th>
-                            </tr>
-                       
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        @endcan
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Other Public Tasks</h4>
-                    <p>All tasks in Other Department that are Public
-
-                    <div class="panel-options">
-                        <a href="#" data-rel="collapse"><i class="fa fa-fw fa-minus"></i></a>
-                        <a href="#" data-rel="reload"><i class="fa fa-fw fa-refresh"></i></a>
-                        <a href="#" data-rel="close"><i class="fa fa-fw fa-times"></i></a>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <tr style="font-size: 11px;">
-                                <th>Due date</th>
-                                <th>Desc</th>
-                                <th>Create date</th>
-                                <th>Priority</th>
-                                <th>Username</th>
-                            </tr>
-                       
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        
+        
     </div>
     </div>
     </div>
@@ -166,7 +91,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="toggle('refresh' , 0)"><span aria-hidden="true">×</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <h4 class="modal-title" id="myModalLabel"><%form_title%></h4>
                         </div>
                         
@@ -279,36 +204,6 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmTasks.$invalid">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-    <div class="modal fade" id="comments" tabindex="-1" role="dialog" aria-labelledby="commentsLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="toggle('refresh' , 0)"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title" id="commentsLabel"><%form_title%></h4>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <table class="table table-issues">
-                                <thead >
-                                <th width="30%">Date</th>
-                                <th>comment</th>
-                            </thead>
-                            <tbody style="font-size: 10px;">
-                                <tr ng-repeat="com in comments">
-                                    <td><%com.created_at%></td> 
-                                    <td><%com.comment%></td> 
-                                </tr>
-                            </tbody>
-                                </thead>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
                         </div>
                     </div>
                 </div>
