@@ -173,7 +173,13 @@ class TasksController extends Controller
         $task = Tasks::find($id);
         $task->status = $request->input('status');   
         if($task->save() && $request->input('comment') <> ""):
-            $comment = new \App\TaskComments;
+          $comment = new \App\TaskComments;
+            //if($request->hasFile('attachment')){
+                $path = $request->file('attachment')->getPathName();
+                $type = pathinfo($path, PATHINFO_EXTENSION);
+                $data = file_get_contents($path);
+                $comment->attachment = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            //}
             $comment->comment = $request->input('comment');
             $comment->task_id = $id;
             $comment->created_by = Auth::user()->id;
