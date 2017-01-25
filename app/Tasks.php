@@ -19,6 +19,11 @@ class Tasks extends Model
     CONST STATUS_COMPLETE = "Complete";
     CONST STATUS_DEW = "Dew";
     
+    
+    public $comment;
+    
+    
+    public $attachment;
     /**
      * Get the category that task belongs.
      */

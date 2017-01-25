@@ -201,7 +201,7 @@
                         </div>
                         
                         <div class="modal-body">
-                            <form name="frmTasks" class="form-horizontal" novalidate="">
+                            <form name="frmTasks" class="form-horizontal" novalidate="" enctype="multipart/form-data" method="post">
                                 <div ng-show="task.id != null"> 
                                   <div class="form-group">
                                     <label for="status" class="col-sm-3 control-label">Task status</label>
@@ -225,6 +225,15 @@
                                         <span class="alert-danger" 
                                         </div>
                                 </div>
+                                </div>
+                                <div class="form-group error" ng-if="task.status == 'On-going'">
+                                    <label for="attachment" class="col-sm-3 control-label">Attach file:</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control has-error" id="attachment" name="attachment" placeholder="Attachment a file" value="<%attachment%>" 
+                                        ng-model="task.attachment">
+                                        <span class="alert-danger" 
+                                        ng-show="frmTasks.attachment.$invalid && frmTasks.attachment.$touched">attachment field is required</span>
+                                    </div>
                                 </div>
                                 </div>
                              
