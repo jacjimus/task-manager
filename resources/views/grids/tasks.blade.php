@@ -26,9 +26,7 @@
 </div>
 
 <div class="container-fluid-md" >
-    <div >
-    <div class="row">
-    <div class="">
+
         <div class="flash-message">
             @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
@@ -55,22 +53,22 @@
                     <table class="table table-condensed">
                         <tr style="font-size: 11px;">
                                 <th>Due date</th>
+                                <th>Create date</th>
                                 <th width='20%'>Description</th>
                                 <th>Category</th>
                                 <th>Creator</th>
                                 <th>Access level</th>
-                                <th>Create date</th>
                                 <th>Priority</th>
                        </tr>
                         
                         <tbody style="font-size: 10px;">
                             <tr ng-repeat="mytask in mytasks">
                                 <td><% mytask.due_date %></td>
-                                <td><% mytask.description %></td>
-                                <td><% mytask.category.name %></td>
-                                <td><% mytask.user.first_name %>&nbsp;<% mytask.user.last_name %></td>
-                                <td><% mytask.access_level %></td>
                                 <td><% mytask.created_at %></td>
+                                <td><% mytask.description %></td>
+                                <td><% mytask.category %></td>
+                                <td><% mytask.creator_name %></td>
+                                <td><% mytask.access_level %></td>
                                 <td><% mytask.priority %></td>
                                 <td style="font-size: 13px;">
                                     <a href="#" title="Add task comments" ng-click="toggle('view', mytask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
@@ -88,7 +86,8 @@
             </div>
         <div class="row">
         @can('isHOD')
-        <div class="col-md-6">
+        
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">Department <code>[<%my_department%>]</code> Tasks</h4>
@@ -104,18 +103,33 @@
                     <table class="table table-striped">
                         <tr style="font-size: 11px;">
                                 <th>Due date</th>
-                                <th>Desc</th>
-                                <th>Create date</th>
+                                <th>Create date</th>                                
+                                <th width='20%'>Description</th>
+                                <th>Category</th>
+                                <th>Creator</th>
+                                <th>Assignee</th>
+                                <th>Access level</th>
+                                <th>Status</th>
                                 <th>Priority</th>
-                                <th>Username</th>
+                                <th></th>
                             </tr>
                        
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                        <tbody style="font-size: 10px;">
+                            <tr ng-repeat="depttask in depttasks">
+                                <td><% depttask.due_date %></td>
+                                <td><% depttask.created_at %></td>
+                                <td><% depttask.description %></td>
+                                <td><% depttask.category %></td>
+                                <td><% depttask.creator_name %></td>
+                                <td><% depttask.assignee_name %></td>
+                                <td><% depttask.access_level %></td>
+                                <td><% depttask.status %></td>
+                                <td><% depttask.priority %></td>
+                                <td style="font-size: 13px;">
+                                    <a href="#" title="Follow task" ng-click="toggle('follow', mytask.id)"><i class="fa fa-fast-forward text-success"></i>&nbsp;
+                                    <a href="#" title="Task history" ng-click="toggle('history', mytask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
+                                    </a>
+                            </td>
                             </tr>
                             
                         </tbody>
@@ -124,7 +138,10 @@
             </div>
         </div>
         @endcan
-        <div class="col-md-6">
+        </div>
+        
+        <div class="row">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">Other Public Tasks</h4>
@@ -140,18 +157,31 @@
                     <table class="table table-striped">
                         <tr style="font-size: 11px;">
                                 <th>Due date</th>
-                                <th>Desc</th>
                                 <th>Create date</th>
+                                <th width='20%'>Description</th>
+                                <th>Category</th>
+                                <th>Creator</th>
+                                <th>Assignee</th>
+                                <th>Status</th>
                                 <th>Priority</th>
-                                <th>Username</th>
+                                <th></th>
                             </tr>
                        
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                        <tbody style="font-size: 10px;">
+                            <tr ng-repeat="publictask in publictasks">
+                                <td><% publictask.due_date %></td>
+                                <td><% publictask.created_at %></td>
+                                <td><% publictask.description %></td>
+                                <td><% publictask.category %></td>
+                                <td><% publictask.creator_name%></td>
+                                <td><% publictask.assignee_name %></td>
+                                <td><% publictask.status %></td>
+                                <td><% publictask.priority %></td>
+                                <td style="font-size: 13px;">
+                                    <a href="#" title="Follow task" ng-click="toggle('follow', mytask.id)"><i class="fa fa-fast-forward text-success"></i>&nbsp;
+                                    <a href="#" title="Task history" ng-click="toggle('history', mytask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
+                                     </a>
+                            </td>
                             </tr>
                             
                         </tbody>
@@ -159,9 +189,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
+        </div>
+    
+    
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -315,8 +345,7 @@
             </div>
     </div>
   </div>
-</div>  
-</div>
+
 @endsection
 
 <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->

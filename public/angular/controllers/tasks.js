@@ -1,8 +1,20 @@
 app.controller('tasksController', function($scope, $http, API_URL) {
-    //retrieve categories listing from API
-    $http.get(API_URL + "mydata")
+    //retrieve mytasks listing from API
+    $http.get(API_URL + "tasksdata")
             .success(function(response) {
                 $scope.mytasks = response;
+                
+            });
+    //retrieve department listing from API
+    $http.get(API_URL + "tasksdata/" + 1)
+            .success(function(response) {
+                $scope.depttasks = response;
+                
+            });
+    //retrieve public listing from API
+    $http.get(API_URL + "tasksdata/" + 2)
+            .success(function(response) {
+                $scope.publictasks = response;
                 
             });
      //retrieve current department       

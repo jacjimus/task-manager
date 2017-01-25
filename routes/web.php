@@ -62,7 +62,7 @@ Route::get('/task/{id?}', 'TasksController@data');
 
 Route::get('/comments/{id?}', 'TasksController@comments');
 
-Route::get('/mydata', 'TasksController@mydata');
+Route::get('/tasksdata/{id?}', 'TasksController@tasksdata');
 
 Route::post('/task', 'TasksController@store');
 
@@ -79,3 +79,5 @@ Route::get('/empdept', 'EmployeeController@empdept');
 Route::any('/verifyuser', 'AdminController@auth');
 
 Route::any('/logout', 'AdminController@logout');
+
+Route::post('/send', 'EmailController@send');

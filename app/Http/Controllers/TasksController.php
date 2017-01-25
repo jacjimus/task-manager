@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Tasks;
 use Illuminate\Support\Facades\DB;
 use Auth;
-
+use App\Task_view;
 class TasksController extends Controller
 {
     public function __construct()
@@ -26,22 +26,50 @@ class TasksController extends Controller
     {
           return \App\Departments::find(Auth::user()->dept)->name;
     }
-    public function mydata($id = null)
+    public function tasksdata($id = null)
     {
-     if ($id == null) {
+     if ($id == null) :
             /* 
               * Access for my tasks
               *  -  Should be able to view all tasks assigned to self
               */
-            return Tasks::orderBy('created_at', 'desc')
-                    ->with('category', 'user')
+            return Task_view::orderBy('created_at', 'desc')
                  ->where('assignee' , Auth::user()->id)
-                 ->where('status' , Tasks::STATUS_NEW)
-                 ->orWhere('status' , Tasks::STATUS_ON_GOING)
+                 ->where(function ($query) {
+                        $query->where('status' , Tasks::STATUS_NEW)
+                              ->orWhere('status' , Tasks::STATUS_ON_GOING);
+                    })
                  ->get();
-         } else {
-            return $this->show($id);
-        }
+            elseif($id == 1): 
+            /* 
+              * Access for my department tasks
+              *  -  Should be able to view all tasks assigned to my department whether
+              * public or private
+              */
+            return Task_view::orderBy('created_at', 'desc')
+                 ->where('assignee_department_id' , Auth::user()->dept)
+                 ->where('assignee' , '!=', Auth::user()->id) // Exclude my tasks
+                 ->where(function ($query) {
+                        $query->where('status' , Tasks::STATUS_NEW)
+                              ->orWhere('status' , Tasks::STATUS_ON_GOING);
+                    })
+                 ->get();
+            elseif($id == 2): 
+            /* 
+              * Access for public access tasks
+              *  -  Should be able to view all tasks assigned to my department whether
+              * public or private
+              */
+            return Task_view::orderBy('created_at', 'desc')
+                 ->where('assignee' , '!=', Auth::user()->id) // Exclude my tasks
+                 //->where('assignee_department_id' , '!=', Auth::user()->dept) // exclude all tasks for my department
+                 ->where('access_level' , Tasks::PUBLIC_ACCESS)
+                 ->where(function ($query) {
+                        $query->where('status' , Tasks::STATUS_NEW)
+                              ->orWhere('status' , Tasks::STATUS_ON_GOING);
+                    })
+                 ->get();
+        endif;
     }
     
     public function comments($id = null)
