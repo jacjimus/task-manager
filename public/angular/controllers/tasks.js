@@ -55,6 +55,7 @@ app.controller('tasksController', function($scope, $http, API_URL) {
                         .success(function(response) {
                             console.log(response);
                             $scope.comments = response;
+                            //alert(response);return false;
                         });
                 $('#comments').modal('show');
                 break;
@@ -117,6 +118,8 @@ app.controller('tasksController', function($scope, $http, API_URL) {
             alert('This is embarassing. An error has occured. Please check the log for details');
         });
     }
+    
+   
 
     //delete record
     $scope.confirmDelete = function(id) {
@@ -139,3 +142,21 @@ app.controller('tasksController', function($scope, $http, API_URL) {
         }
     }
 });
+app.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
