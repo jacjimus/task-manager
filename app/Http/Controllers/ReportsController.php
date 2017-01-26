@@ -40,17 +40,15 @@ class ReportsController extends Controller
     
     public function daily()
     {
-        $query = (new \App\Task_Reports)
-    ->newQuery()
-    ->where('role', '=', 3);
-
-
+        $query = (new \App\Daily_Task_Reports)
+    ->newQuery();
+    
 
 # Instantiate & Configure Grid
 $grid = new Grid(
             (new GridConfig)
                 ->setDataProvider(
-                    new EloquentDataProvider(\App\Task_Reports::query())
+                    new EloquentDataProvider(\App\Daily_Task_Reports::query())
                 )
                 ->setName('Daily Reports')
                 ->setPageSize(15)
@@ -191,10 +189,9 @@ $grid = new Grid(
     }
     public function weekly()
     {
-        $query = (new \App\Tasks)
+         $query = (new \App\Weekly_Task_Reports)
     ->newQuery()
-    ->with('users');
-    //->where('role', '=', 3);
+    ->where('role', '=', 3);
 
 
 
@@ -202,84 +199,79 @@ $grid = new Grid(
 $grid = new Grid(
             (new GridConfig)
                 ->setDataProvider(
-                    new EloquentDataProvider(User::query())
+                    new EloquentDataProvider(\App\Weekly_Task_Reports::query())
                 )
                 ->setName('Daily Reports')
                 ->setPageSize(15)
                 ->setColumns([
                     (new FieldConfig)
-                        ->setName('id')
+                        ->setName('assignee')
                         ->setLabel('ID')
                         ->setSortable(true)
-                        ->setSorting(Grid::SORT_ASC)
+                        //->setSorting(Grid::SORT_ASC)
                     ,
                     (new FieldConfig)
-                        ->setName('name')
-                        ->setLabel('Name')
-                        ->setCallback(function ($val) {
-                            return "<span class='glyphicon glyphicon-user'></span>{$val}";
-                        })
+                        ->setName('fullname')
+                        ->setLabel('Employee name')
                         ->setSortable(true)
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
+                        //->setSorting(Grid::SORT_ASC)
                     ,
                     (new FieldConfig)
-                        ->setName('email')
-                        ->setLabel('Email')
+                        ->setName('status_assigned_tasks')
+                        ->setLabel('Tasks Assigned')
                         ->setSortable(true)
                         ->setCallback(function ($val) {
-                            $icon = '<span class="glyphicon glyphicon-envelope"></span>&nbsp;';
+                            //$icon = '<span class="glyphicon glyphicon-envelope"></span>&nbsp;';
                             return
                                 '<small>'
-                                . $icon
+                                //. $icon
                                 . HTML::link("mailto:$val", $val)
                                 . '</small>';
                         })
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
+                        
                     ,
                     (new FieldConfig)
-                        ->setName('phone_number')
-                        ->setLabel('Phone')
+                        ->setName('status_completed_tasks')
+                        ->setLabel('Tasks Completed')
                         ->setSortable(true)
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
+                        ->setCallback(function ($val) {
+                           // $icon = '<span class="glyphicon glyphicon-envelope"></span>&nbsp;';
+                            return
+                                '<small>'
+                               // . $icon
+                                . HTML::link("mailto:$val", $val)
+                                . '</small>';
+                        })
+                        
                     ,
                     (new FieldConfig)
-                        ->setName('country')
-                        ->setLabel('Country')
+                        ->setName('status_ongoing_task')
+                        ->setLabel('Tasks Pending')
                         ->setSortable(true)
+                        ->setCallback(function ($val) {
+                            //$icon = '<span class="glyphicon glyphicon-envelope"></span>&nbsp;';
+                            return
+                                '<small>'
+                                //. $icon
+                                . HTML::link("mailto:$val", $val)
+                                . '</small>';
+                        })
+                        
                     ,
                     (new FieldConfig)
-                        ->setName('company')
-                        ->setLabel('Company')
+                        ->setName('status_due_tasks')
+                        ->setLabel('Tasks Due')
                         ->setSortable(true)
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
-                    ,
-                    (new FieldConfig)
-                        ->setName('birthday')
-                        ->setLabel('Birthday')
-                        ->setSortable(true)
-                    ,
-                    (new FieldConfig)
-                        ->setName('posts_count')
-                        ->setLabel('Posts')
-                        ->setSortable(true)
-                    ,
-                    (new FieldConfig)
-                        ->setName('comments_count')
-                        ->setLabel('Comments')
-                        ->setSortable(true)
-                    ,
+                        ->setCallback(function ($val) {
+                            //$icon = '<span class="glyphicon glyphicon-envelope"></span>&nbsp;';
+                            return
+                                '<small>'
+                                //. $icon
+                                . HTML::link("mailto:$val", $val)
+                                . '</small>';
+                        })
+                        
+                    
                 ])
                 ->setComponents([
                     (new THead)
@@ -288,9 +280,9 @@ $grid = new Grid(
                             (new FiltersRow)
                                 ->addComponents([
                                     (new RenderFunc(function () {
-                                        return HTML::style('js/daterangepicker/daterangepicker-bs3.css')
-                                        . HTML::script('js/moment/moment-with-locales.js')
-                                        . HTML::script('js/daterangepicker/daterangepicker.js')
+                                        return HTML::style('daterangepicker/daterangepicker-bs3.css')
+                                        . HTML::script('moment/moment-with-locales.js')
+                                        . HTML::script('daterangepicker/daterangepicker.js')
                                         . "<style>
                                                 .daterangepicker td.available.active,
                                                 .daterangepicker li.active,
@@ -300,12 +292,8 @@ $grid = new Grid(
                                                 }
                                            </style>";
                                     }))
-                                        ->setRenderSection('filters_row_column_birthday'),
-                                    (new DateRangePicker)
-                                        ->setName('created_at')
-                                        ->setRenderSection('filters_row_column_birthday')
-                                        ->setDefaultValue(['1990-01-01', date('Y-m-d')])
-                                ])
+                                        ->setRenderSection('filters_row_column_assigned'),
+                                    ])
                             ,
                             (new OneCellRow)
                                 ->setRenderSection(RenderableRegistry::SECTION_END)
@@ -313,7 +301,7 @@ $grid = new Grid(
                                     new RecordsPerPage,
                                     new ColumnsHider,
                                     (new CsvExport)
-                                        ->setFileName('my_report' . date('Y-m-d'))
+                                        ->setFileName('tasks_daily_report' . date('Y-m-d'))
                                     ,
                                     new ExcelExport(),
                                     (new HtmlTag)

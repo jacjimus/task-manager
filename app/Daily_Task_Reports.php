@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Task_Reports extends Model
+class Daily_Task_Reports extends Model
 {
-    protected $table = 'task_reports';
+    protected $table = 'daily_task_reports';
     
     protected $primaryKey = 'id';
 }
