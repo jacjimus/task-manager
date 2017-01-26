@@ -4,17 +4,15 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class UserTest extends TestCase
 {
     /**
-     * A basic functional test example.
+     * A basic test example.
      *
      * @return void
      */
-    public function testEquality() {
-        $this->assertEquals(
-            [1, 2,  3, 4, 5, 6],
-            [1, 2, 3, 4, 5, 6]
-        );
+    public function testExample()
+    {
+        $this->assertTrue(true);
     }
 }

@@ -38,7 +38,7 @@
                         <input type="password" name='password' class="form-control input-lg" id="password" placeholder="Password">
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">SIGN IN</button>
+                    <button type="submit" name="Login" class="btn btn-primary btn-block btn-lg">Login</button>
                 </form>
                 
                 <br />
