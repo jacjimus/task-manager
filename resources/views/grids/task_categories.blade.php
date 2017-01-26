@@ -1,7 +1,7 @@
 
 @extends('layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Task Categories')
 
 @section('content')
     <div class="page-content">
@@ -9,7 +9,7 @@
     <ol class="breadcrumb">
         <li><a href="javascript:;">Dashboard</a></li>
         <li><a href="javascript:;">Tasks</a></li>
-        <li class="active"><a href="javascript:;">Categories</a></li>
+        <li class="active"><a href="javascript:;">Task Categories</a></li>
     </ol>
 </div>
 <div class="page-heading page-heading-md">

@@ -81,3 +81,8 @@ Route::any('/verifyuser', 'AdminController@auth');
 Route::any('/logout', 'AdminController@logout');
 
 Route::post('/send', 'EmailController@send');
+ // Reports routes
+
+Route::get('/daily-reports', 'ReportsController@daily');
+
+Route::get('/weekly-reports', 'ReportsController@weekly');

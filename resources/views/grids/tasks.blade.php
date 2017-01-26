@@ -1,7 +1,7 @@
 
 @extends('layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Tasks')
 
 @section('content')
 
@@ -207,7 +207,7 @@
                                                                         <div class="form-group">
                                                                             <label for="status" class="col-sm-3 control-label">Task status</label>
                                                                             <div class="col-sm-9">
-                                                                                <select class="form-control" id="status" name="status" ng-model="task.status" required="true"
+                                                                                <select class="form-control" id="status" name="status" ng-model="task.status" 
                                                                                         <option value="">--Select--</option>
                                                                                     <option value="New" >New</option>
                                                                                     <option value="On-going">On-going</option>
