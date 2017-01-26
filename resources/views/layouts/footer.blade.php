@@ -1,6 +1,7 @@
         <script src="{{ url('/') }}/dist/assets/libs/jquery/jquery.min.js"></script>
         <script src="{{ url('/') }}/dist/assets/bs3/js/bootstrap.min.js"></script>
-         <script src="{{ url('/') }}/dist/js/main.js"></script>
+        <script src="{{ url('/') }}/dist/assets/plugins/jquery-navgoco/jquery.navgoco.js"></script>
+        <script src="{{ url('/') }}/dist/js/main.js"></script>
 
        <script src="{{ url('/') }}/demo/js/demo.js"></script>
        
