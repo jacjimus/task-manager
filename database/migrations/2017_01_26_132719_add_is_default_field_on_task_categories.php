@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentsTable extends Migration
+class AddIsDefaultFieldOnTaskCategories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('task_categories', function (Blueprint $table) {
+             $table->boolean('is_default');
+            
+        });
     }
 
     /**
@@ -23,6 +26,8 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('task_categories', function (Blueprint $table) {
+            //
+        });
     }
 }
