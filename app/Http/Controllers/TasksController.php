@@ -173,6 +173,7 @@ class TasksController extends Controller
     public function update(Request $request, $id) {
         $task = Tasks::find($id);
         $task->status = $request->input('status');   
+        $task->category_id = $request->input('category_id');   
         if($task->save() && $request->input('comment') <> ""):
           $comment = new \App\TaskComments;
             if($request->input('attachment') <> "")

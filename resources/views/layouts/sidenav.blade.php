@@ -12,12 +12,12 @@
                             </a>
                             <ul class="nav-sub">
                                 <li>
-                                    <a href="{{url('/departments')}}" title="Departments">
+                                    <a href="#" title="Departments">
                                         <i class="fa fa-fw fa-caret-right"></i>Manage Departments 
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/roles')}}" title="Roles">
+                                    <a href="#" title="Roles">
                                         <i class="fa fa-fw fa-caret-right"></i>Manage Roles 
                                     </a>
                                 </li>
@@ -33,11 +33,7 @@
                                 <i class="fa fa-lg fa-fw fa-tasks"></i> Tasks Manager
                                                             </a>
                             <ul class="nav-sub">
-                                <li class="{{ (Request::is('task') ? 'active open' : '') }}">
-                                    <a href="{{url('/tasks')}}" title="Create task">
-                                        <i class="fa fa-fw fa-caret-right"></i> All Tasks
-                                    </a>
-                                </li>
+                                
                                 <li class="{{ (Request::is('task-categories') ? 'active open' : '') }}">
                                     <a href="{{url('/task-categories')}}" title="Task categories">
                                         <i class="fa fa-fw fa-caret-right"></i>Task categories

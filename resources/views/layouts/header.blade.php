@@ -12,13 +12,11 @@
         <link rel="stylesheet" href="{{ url('/') }}/demo/css/demo.css">
         <link rel="stylesheet" href="{{ url('/') }}/dist/assets/font-awesome/css/font-awesome.css">
 
-        <link rel="stylesheet" href="{{ url('/') }}/dist/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css"/>
-        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/rickshaw.min.css">
-        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/morris.min.css">
-
-        <!--[if lt IE 9]>
-        <script src="dist/assets/libs/html5shiv/html5shiv.min.js"></script>
-        <script src="dist/assets/libs/respond/respond.min.js"></script>
-        <![endif]-->
-
+        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/jquery-select2.min.css">
+        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/jquery-selectBoxIt.min.css">
+        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/jquery-chosen.min.css">
+        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/bootstrap-tagsinput.min.css">
+        <link rel="stylesheet" href="{{ url('/') }}/dist/css/plugins/bootstrap-switch.min.css">
+        <link rel="stylesheet" href="{{ url('/') }}/dist/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+        
     </head>

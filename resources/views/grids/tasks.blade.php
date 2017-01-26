@@ -1,7 +1,7 @@
 
 @extends('layout')
 
-@section('title', 'Tasks')
+@section('title', 'Dashboard')
 
 @section('content')
 
@@ -9,9 +9,7 @@
     <div class="page-subheading page-subheading-md">
         <ol class="breadcrumb">
             <li><a href="javascript:;">Dashboard</a></li>
-            <li><a href="javascript:;">Tasks Manager</a></li>
-            <li class="active"><a href="javascript:;">Tasks</a></li>
-        </ol>
+              </ol>
     </div>
     <div class="page-heading page-heading-md">
         <div class="row">
@@ -36,6 +34,7 @@
             @endforeach
         </div> <!-- end .flash-message -->
         <div class="row">
+           
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -72,8 +71,8 @@
                                     <td><% mytask.priority %></td>
                                     <td style="font-size: 13px;">
                                         <a href="#" title="Add task comments" ng-click="toggle('view', mytask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
-                                            <a href="#" title="Task history" ng-click="toggle('history', mytask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
-                                                <a href="#" title="Close task" ng-click="toggle('close', mytask.id)"><i class="fa fa-bell text-danger"></i>&nbsp;
+                                            <a href="#"  title="Task history" ng-click="toggle('history', mytask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
+                                             <a href="#" title="Close task" ng-click="toggle('close', mytask.id)"><i class="fa fa-bell text-danger"></i>&nbsp;
                                                 </a>
                                                 </td>
                                                 </tr>
@@ -202,9 +201,8 @@
 
                                                             <div class="modal-body">
                                                                 <form name="frmTasks" class="form-horizontal" novalidate="" enctype="multipart/form-data" method="post">
-
-                                                                    <div ng-show="task.id != null"> 
-                                                                        <div class="form-group">
+ 
+                                                                        <div class="form-group" ng-if="task.id != null">
                                                                             <label for="status" class="col-sm-3 control-label">Task status</label>
                                                                             <div class="col-sm-9">
                                                                                 <select class="form-control" id="status" name="status" ng-model="task.status" 
@@ -217,7 +215,8 @@
                                                                                 <span class="alert-danger" 
                                                                                       ng-show="frmTasks.status.$invalid && frmTasks.status.$touched">Status field is required</span>
                                                                             </div>
-                                                                        </div>
+                                                                        </div> 
+                                                                        
                                                                         <div class="form-group error" ng-if="task.status == 'On-going'">
                                                                             <label for="comment" class="col-sm-3 control-label">Add comments</label>
                                                                             <div class="col-sm-9">
@@ -227,13 +226,18 @@
                                                                             </div>
                                                                         </div>
                                                                     
-                                                                    <div class="form-group error" ng-if="task.status == 'On-going'">
-                                                                        <label for="attachment" class="col-sm-3 control-label">Attach file:</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="file" fileread="task.attachment" class="form-control has-error" id="attachment" name="attachment">
-                                                                        </div>
+                                                                   <div class="form-group" ng-show="(task.category_id ==1 && task.id != null) || task.id == null">
+                                                                    <label for="category_id" class="col-sm-3 control-label">Task category</label>
+                                                                    <div class="col-sm-9">
+                                                                        <select class="form-control" id="category_id" name="category_id" ng-model="task.category_id" ng-required="true"
+                                                                                ng-options="cat.id as cat.name for cat in categories">
+                                                                            <option value="">Select category</option>
+                                                                        </select>
+                                                                        <span class="alert-danger" 
+                                                                              ng-show="frmTasks.category_id.$invalid && frmTasks.category_id.$touched">category field is required</span>
                                                                     </div>
                                                                 </div>
+                                                                
 
                                                             <div ng-show="task.id == null"> 
                                                                 <div class="form-group error">
@@ -245,17 +249,7 @@
                                                                               ng-show="frmTasks.description.$invalid && frmTasks.description.$touched">description field is required</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="category_id" class="col-sm-3 control-label">Task category</label>
-                                                                    <div class="col-sm-9">
-                                                                        <select class="form-control" id="category_id" name="category_id" ng-model="task.category_id" ng-required="true"
-                                                                                ng-options="cat.id as cat.name for cat in categories">
-                                                                            <option value="">Select category</option>
-                                                                        </select>
-                                                                        <span class="alert-danger" 
-                                                                              ng-show="frmTasks.category_id.$invalid && frmTasks.category_id.$touched">category field is required</span>
-                                                                    </div>
-                                                                </div>
+                                                                
 
                                                                 <div class="form-group">
                                                                     <label for="assignee" class="col-sm-3 control-label">Assignee</label>
@@ -270,7 +264,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="due_date" class="col-sm-3 control-label">Due date</label>
-                                                                    <div class="col-sm-9 date">
+                                                                    <div class="col-sm-9 input-group date">
                                                                         <input type="text" data-rel="datepicker" class="form-control has-error date" id="due_date" name="due_date" placeholder="format yyyy-mm-dd hh:mm:ss" value="<%due_date%>" 
                                                                                ng-model="task.due_date" ng-required="true">
                                                                         <span class="alert-danger" 
@@ -304,12 +298,18 @@
                                                                 <div class="form-group">
                                                                     <label for="notif_depts" class="col-sm-3 control-label">Dept to be notified</label>
                                                                     <div class="col-sm-9">
-                                                                        <select class="form-control" id="notif_depts" name="notif_depts" ng-model="task.notif_depts" multiple
+                                                                        <select class="form-control form-chosen" id="notif_depts" name="notif_depts" ng-model="task.notif_depts" multiple
                                                                                 ng-options="dept.id as dept.name for dept in departments">
                                                                             <option value="">Select dept</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                                <div class="form-group error">
+                                                                        <label for="attachment" class="col-sm-3 control-label">Attach file:</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="file" fileread="task.attachment" class="form-control has-error" id="attachment" name="attachment">
+                                                                        </div>
+                                                                    </div>
                                                             </div>
 
                                                             </form>

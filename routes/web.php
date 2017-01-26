@@ -20,7 +20,6 @@ Route::get('/', 'AdminController@login');
 
 Route::get('/login', 'AdminController@login');
 
-Route::get('/dashboard', 'DashboardController@index');
 // All routes related to Employees
 Route::any('/employees', 'EmployeeController@index');
 
@@ -54,7 +53,7 @@ Route::post('/category/{id}', 'TaskCategoriesController@update');
 Route::delete('/category/{id}', 'TaskCategoriesController@destroy');
 // All routes related to tasks
 
-Route::any('/tasks', 'TasksController@index');
+Route::any('/dashboard', 'TasksController@index');
 
 Route::any('/ongoing-tasks', 'TasksController@ongoing');
 
