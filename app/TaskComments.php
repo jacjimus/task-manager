@@ -13,4 +13,10 @@ class TaskComments extends Model
      * @var string
      */
     protected $table = 'task_comments';
+    
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User' , 'created_by');
+    }
 }

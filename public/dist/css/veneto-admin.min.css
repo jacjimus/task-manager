@@ -728,7 +728,7 @@ a.badge-dark:focus, a.badge-dark:hover {
     padding-top: 7px;
     border-radius: 3px;
     line-height: 18px;
-}
+    }
 @media (max-width:767px) {
     .dropdown-menu.pull-right-xs {
     right: 0;
@@ -790,7 +790,7 @@ a.badge-dark:focus, a.badge-dark:hover {
     font-size: 11px;
 }
 .dropdown-notifications {
-    min-width: 260px;
+    min-width: 460px;
 }
 .dropdown-notifications>li {
     border-bottom: 1px solid #e5e5e5;

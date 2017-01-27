@@ -138,10 +138,3 @@
     </div>
   </div>
 @endsection
-
-<!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-      
-<!-- AngularJS Application Scripts -->
-<script type="text/javascript" src="<?= asset('angular/app.js') ?>"></script>
-<script type="text/javascript" src="<?= asset('angular/controllers/employees.js') ?>"></script>

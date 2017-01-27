@@ -4,7 +4,16 @@
 <!--[if gt IE 9]><!--> <html> <!--<![endif]-->
 
  @include('layouts.header')
-    <body class="">
+ <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<!-- AngularJS Application Scripts -->
+<script type="text/javascript" src="<?= asset('angular/app.js') ?>"></script>
+<script type="text/javascript" src="<?= asset('angular/controllers/employees.js') ?>"></script>
+<script type="text/javascript" src="<?= asset('angular/controllers/tasks.js') ?>"></script>
+<script type="text/javascript" src="<?= asset('angular/controllers/taskcategory.js') ?>"></script>
+
+<body class="">
         <header>
             <nav class="navbar navbar-default navbar-fixed-top  no-margin" role="navigation">
                 <div class="navbar-brand-group">
@@ -78,4 +87,5 @@
         @include ('layouts.footer')
 
     </body>
+    
 </html>

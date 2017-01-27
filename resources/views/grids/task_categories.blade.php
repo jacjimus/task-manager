@@ -47,8 +47,8 @@
                         <td><% cat.user.first_name %>&nbsp;<% cat.user.last_name %></td>
                         <td><% cat.created_at %></td>
                         <td>
-                            <button class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', cat.id)">Edit</button>
-                            <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(cat.id)">Delete</button>
+                            <button ng-show="cat.id != 1" class="btn btn-default btn-xs btn-detail" ng-click="toggle('edit', cat.id)">Edit</button>
+                            <button ng-show="cat.id != 1" class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(cat.id)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -90,10 +90,3 @@
     </div>
   </div>
 @endsection
-
-<!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-      
-<!-- AngularJS Application Scripts -->
-<script type="text/javascript" src="<?= asset('angular/app.js') ?>"></script>
-<script type="text/javascript" src="<?= asset('angular/controllers/taskcategory.js') ?>"></script>

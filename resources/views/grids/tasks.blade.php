@@ -71,7 +71,7 @@
                                     <td><% mytask.priority %></td>
                                     <td style="font-size: 13px;">
                                         <a href="#" title="Add task comments" ng-click="toggle('view', mytask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
-                                            <a href="#"  title="Task history" ng-click="toggle('history', mytask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
+                                            <a href="{{url('/view-task')}}/<% mytask.id %>"  title="Task history" ><i class="fa fa-list-ol text-primary"></i>&nbsp;
                                              <a href="#" title="Close task" ng-click="toggle('close', mytask.id)"><i class="fa fa-bell text-danger"></i>&nbsp;
                                                 </a>
                                                 </td>
@@ -357,9 +357,4 @@
 
                                                 @endsection
 
-                                                <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
-                                                <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-
-                                                <!-- AngularJS Application Scripts -->
-                                                <script type="text/javascript" src="<?= asset('angular/app.js') ?>"></script>
-                                                <script type="text/javascript" src="<?= asset('angular/controllers/tasks.js') ?>"></script>
+                                                

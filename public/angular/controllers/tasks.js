@@ -121,6 +121,26 @@ app.controller('tasksController', function($scope, $http, API_URL) {
     
    
 
+    //mark notification as read
+    $scope.markAsRead = function(id) {
+        var isConfirmDelete = confirm('Are you sure you want to delete this record?');
+        if (isConfirmDelete) {
+            $http({
+                method: 'DELETE',
+                url: API_URL + 'tasks/' + id
+            }).
+                    success(function(data) {
+                        console.log(data);
+                        location.reload();
+                    }).
+                    error(function(data) {
+                        console.log(data);
+                        alert('Unable to delete');
+                    });
+        } else {
+            return false;
+        }
+    }
     //delete record
     $scope.confirmDelete = function(id) {
         var isConfirmDelete = confirm('Are you sure you want to delete this record?');

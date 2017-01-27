@@ -16,10 +16,10 @@
 <div class="page-heading page-heading-md">
     <div class="row">
     <div class="col-md-8">
-    <h2 >My On-going Tasks</h2>
+    <h2 >Task: {{$task->description}} </h2>
     </div>
     <div class="col-md-2">
-        <a href="{{url('/tasks')}}" class="text-primary-dark"><i class="fa fa-caret-left">&nbsp;</i>Back to task listing</a> 
+        <a href="{{url('/dashboard')}}" class="text-primary-dark"><i class="fa fa-caret-left">&nbsp;</i>Back to task listing</a> 
     </div>
     <div class="col-md-2 text-right"></div>
 </div>
@@ -38,45 +38,42 @@
             @endforeach
         </div> <!-- end .flash-message -->
         <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    
-                    <p>Tasks listing in order of <code>priority</code> and <code>due date</code></p>
-
-                    <div class="panel-options">
-                        <a href="#" data-rel="collapse"><i class="fa fa-fw fa-minus"></i></a>
-                        <a href="#" data-rel="reload"><i class="fa fa-fw fa-refresh"></i></a>
-                        <a href="#" data-rel="close"><i class="fa fa-fw fa-times"></i></a>
+        <div class="col-md-12 col-lg-12">
+            <div class="panel panel-lg panel-light mail-thread">
+                
+                <div class="panel-body padding-md-vertical mail-subject thin">
+                    <i class="m-star starred"></i>
+                    Created by: {{$task->user->first_name}}&nbsp;{{$task->user->last_name}}
+                    <span class="label label-info">Date created</span>{{$task->created_at}}
+                    <i class="fa fa-certificate 
+                        <?php if($task->priority == "Low"):$class='text-primary';elseif($task->priority == "Normal"):$class='text-warning';else:$class='text-danger';endif;echo $class;?> "></i>Priority {{$task->priority}}
+                </div>
+                @foreach($comments As $comm):
+                <div class="panel-body padding-md-vertical">
+                    <div class="mail-message">
+                        <img class="mail-sender-image img-circle pull-left" src="demo/images/avatars/8.jpg">
+                        <div class="mail-meta">
+                            <span class="mail-date pull-right">
+                                {{$comm->created_at}}
+                                <i class="m-star"></i>
+                            </span>
+                            <h4 class="text-primary">{{$comm->user->first_name}}&nbsp;{{$comm->user->last_name}}</h4>
+                            <small class="text-muted">{{$comm->user->email}}</small>
+                        </div>
+                        <div class="mail-body">
+                            <p>{{$comm->comment}}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <table class="table table-condensed">
-                        <tr style="font-size: 11px;">
-                                <th>Due date</th>
-                                <th width='20%'>Description</th>
-                                <th>Category</th>
-                                <th>Creator</th>
-                                <th>Access level</th>
-                                <th>Create date</th>
-                                <th>Priority</th>
-                       </tr>
-                        
-                        <tbody style="font-size: 10px;">
-                            <tr ng-repeat="mytask in mytasks">
-                                <td><% mytask.due_date %></td>
-                                <td><% mytask.description %></td>
-                                <td><% mytask.category.name %></td>
-                                <td><% mytask.user.first_name %>&nbsp;<% mytask.user.last_name %></td>
-                                <td><% mytask.access_level %></td>
-                                <td><% mytask.created_at %></td>
-                                <td><% mytask.priority %></td>
-                                <td><button class="btn btn-success btn-xs btn-detail" ng-click="toggle('view', mytask.id)">View</button>
-                            </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
+                @endforeach;
+                
+                <div class="panel-body padding-md-vertical">
+                    <div class="mail-message">
+                        <img class="mail-sender-image img-circle pull-left hidden-xs" src="demo/images/avatars/2.jpg">
+                        <div class="mail-body">
+                            <textarea class="form-control" placeholder="Click here to comment..." style="resize:vertical;"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

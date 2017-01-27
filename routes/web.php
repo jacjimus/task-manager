@@ -61,6 +61,8 @@ Route::get('/task/{id?}', 'TasksController@data');
 
 Route::get('/comments/{id?}', 'TasksController@comments');
 
+Route::get('/view-task/{id?}/{notif?}', 'TasksController@task');
+
 Route::get('/tasksdata/{id?}', 'TasksController@tasksdata');
 
 Route::post('/task', 'TasksController@store');

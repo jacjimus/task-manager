@@ -166,6 +166,25 @@ public function sendTaskCreationNotification($users , $task)
     public function show($id) {
         return Tasks::find($id);
     }
+    
+    /*
+     * view task(s) details
+     */
+    public function task($id = null , $notif = null) {
+        if($notif <> null):
+          $user = Auth::user();
+            $notification = $user->notifications()->where('id',$notif)->first();
+        if ($notification)
+        {
+            $notification->markAsRead();
+            
+        }  
+        endif;
+            
+       $task = Tasks::find($id);
+       $comments = \App\TaskComments::orderBy('created_at', 'DESC')->with('user')->where('task_id', $task->id)->get();
+        return view('grids.notifications' , compact('task', 'comments'));
+    }
 
     public function close(Request $request, $id) {
         $task = Tasks::find($id);
