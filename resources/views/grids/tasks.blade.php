@@ -125,10 +125,10 @@
                                                                             <td><% depttask.status %></td>
                                                                             <td><% depttask.priority %></td>
                                                                             <td style="font-size: 13px;">
-                                                                                <a href="#" title="Add task comments" ng-click="toggle('view', depttask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
-                                                                                <a href="#" title="Follow task" ng-show="isFollow(depttask.id)" ng-click="toggle('follow', depttask.id)"><i class="fa fa-fa-recycle text-warning"></i>&nbsp;
-                                                                                <a href="{{url('/view-task')}}/<% depttask.id %>" title="Task history" ><i class="fa fa-list-ol text-primary"></i>&nbsp;
-                                                                                    </a>
+                                                                                <a href="#" title="Add task comments" ng-click="toggle('view', depttask.id)"><i class="fa fa-comment text-success"></i></a>&nbsp;
+                                                                                <a href="#" title="Follow task"  ng-click="toggle('follow', depttask.id)"><i class="fa fa-recycle text-warning"></i></a>&nbsp;
+                                                                                <a href="{{url('/view-task')}}/<% depttask.id %>" title="Task history" ><i class="fa fa-list-ol text-primary"></i></a>&nbsp;
+                                                                                    
                                                                             </td>
                                                                         </tr>
 
