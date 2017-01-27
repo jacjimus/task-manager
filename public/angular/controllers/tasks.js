@@ -114,6 +114,7 @@ app.controller('tasksController', function($scope, $http, API_URL) {
         if (modalstate === 'view'){
             url += "/" + id;
         }
+       // alert($scope.task['attachment'])
         $http({
             method: 'POST',
             url: url,

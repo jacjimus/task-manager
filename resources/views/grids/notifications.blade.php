@@ -61,7 +61,8 @@
                             <small class="text-muted">{{$comm->user->email}}</small>
                         </div>
                         <div class="mail-body">
-                            <p>{{$comm->comment}}</p>
+                            <div class="col-md-7"><p>{{$comm->comment}}</p></div>
+                            <div class="col-md-5"><a href="{{$comm->attachment}}" target="_blank"><img src="{{$comm->attachment}}" class="img-thumbnail" height="100" width="200"/></a></div>
                         </div>
                     </div>
                 </div>

@@ -140,7 +140,7 @@ class TasksController extends Controller
         $task->created_by = Auth::user()->id;
         $task->notif_users_status = 0;
         $task->notif_dept_status = 0;
-        //$task->attachment = '';
+        $task->attachment = $request->input('attachment'); 
         $task->created_by = Auth::user()->id;
         $task->priority = $request->input('priority');
         $task->notif_users = serialize($request->input('notif_users'));
