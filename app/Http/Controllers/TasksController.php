@@ -18,19 +18,32 @@ class TasksController extends Controller
     {
         $this->middleware('auth');
     }
+    /*
+     * the tasks listing route
+     */
     public function Index()
     {
           return view('grids.tasks');
     }
+    /*
+     * 
+     */
     
     public function ongoing()
     {
           return view('grids.myongoingtasks');
     }
+    /*
+     * This method returns name of the current logged in user
+     */
     public function my_dept()
     {
           return \App\Departments::find(Auth::user()->dept)->name;
     }
+    
+    /*
+     * this methos returns list of tasks in array format
+     */
     public function tasksdata($id = null)
     {
      if ($id == null) :
@@ -76,7 +89,9 @@ class TasksController extends Controller
                  ->get();
         endif;
     }
-    
+    /*
+     * This method returns comments for a given task
+     */
     public function comments($id = null)
     {
      return \App\TaskComments::orderBy('created_at', 'desc')
@@ -84,6 +99,7 @@ class TasksController extends Controller
                  ->get();
          
     }
+    
     public function data($id = null)
     {
      if ($id == null) {
@@ -193,6 +209,11 @@ public function sendTaskCommentNotification($users , $task)
        $comments = \App\TaskComments::orderBy('created_at', 'DESC')->with('user')->where('task_id', $task->id)->get();
         return view('grids.notifications' , compact('task', 'comments'));
     }
+    
+    /*
+     * This method executes closing of a given task  setting
+     * the status as Completed
+     */
 
     public function close(Request $request, $id) {
         $task = Tasks::find($id);
