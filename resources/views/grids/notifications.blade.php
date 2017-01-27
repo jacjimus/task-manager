@@ -62,7 +62,10 @@
                         </div>
                         <div class="mail-body">
                             <div class="col-md-7"><p>{{$comm->comment}}</p></div>
-                            <div class="col-md-5"><a href="{{$comm->attachment}}" target="_blank"><img src="{{$comm->attachment}}" class="img-thumbnail" height="100" width="200"/></a></div>
+                            <div class="col-md-5">
+                                @if($comm->attachment <> null)
+                                <a href="{{$comm->attachment}}" target="_blank"><img src="{{$comm->attachment}}" class="img-thumbnail" height="100" width="200"/></a></div>
+                                @endif
                         </div>
                     </div>
                 </div>
