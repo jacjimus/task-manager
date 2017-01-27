@@ -30,8 +30,7 @@
                             </div>
                         </form>
                     </li>
-                    @include('layouts.messages')
-                    
+                     
                     @include('layouts.notif')
                     
                     <li class="dropdown">

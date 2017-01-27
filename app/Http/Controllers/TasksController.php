@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tasks;
+use App\Schedules;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\User;
+use App\Notifications\TaskNotifications;
 use App\Task_view;
+use Illuminate\Support\Facades\Notification;
 class TasksController extends Controller
 {
     public function __construct()
@@ -140,12 +144,19 @@ class TasksController extends Controller
         $task->priority = $request->input('priority');
         $task->notif_users = serialize($request->input('notif_users'));
         $task->notif_depts = serialize($request->input('notif_depts'));
-        $task->save();
-
-         $request->session()->flash('alert-success', 'Task  was successful created!');
+       if($task->save())
+           $this->sendTaskCreationNotification (User::findMany($request->input('notif_users')), $task);
+         $request->session()->flash('alert-success', 'Task  was successful created and notification send!');
   
     }
-
+    
+    /*
+     * Send task creation notification
+     */
+public function sendTaskCreationNotification($users , $task)
+{
+           Notification::send($users, new TaskNotifications($task));
+}
     /**
      * Display the specified resource.
      *
