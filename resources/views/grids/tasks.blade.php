@@ -125,8 +125,9 @@
                                                                             <td><% depttask.status %></td>
                                                                             <td><% depttask.priority %></td>
                                                                             <td style="font-size: 13px;">
-                                                                                <a href="#" title="Follow task" ng-click="toggle('follow', depttask.id)"><i class="fa fa-fast-forward text-success"></i>&nbsp;
-                                                                                    <a href="#" title="Task history" ng-click="toggle('history', depttask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
+                                                                                <a href="#" title="Add task comments" ng-click="toggle('view', depttask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
+                                                                                <a href="#" title="Follow task" ng-show="isFollow(depttask.id)" ng-click="toggle('follow', depttask.id)"><i class="fa fa-fa-recycle text-warning"></i>&nbsp;
+                                                                                <a href="{{url('/view-task')}}/<% depttask.id %>" title="Task history" ><i class="fa fa-list-ol text-primary"></i>&nbsp;
                                                                                     </a>
                                                                             </td>
                                                                         </tr>
@@ -177,9 +178,10 @@
                                                                             <td><% publictask.status %></td>
                                                                             <td><% publictask.priority %></td>
                                                                             <td style="font-size: 13px;">
-                                                                                <a href="#" title="Follow task" ng-click="toggle('follow', publictask.id)"><i class="fa fa-fast-forward text-success"></i>&nbsp;
-                                                                                    <a href="#" title="Task history" ng-click="toggle('history', publictask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
-                                                                                    </a>
+                                                                                <a href="#" title="Add task comments" ng-click="toggle('view', publictask.id)"><i class="fa fa-comment text-success"></i>&nbsp;
+                                                                                <a href="#" title="Follow task" ng-click="toggle('follow', publictask.id)"><i class="fa fa-recycle text-warning"></i>&nbsp;
+                                                                                <a href="{{url('/view-task')}}/<% publictask.id %>" title="Task history" ng-click="toggle('history', publictask.id)"><i class="fa fa-list-ol text-primary"></i>&nbsp;
+                                                                                 </a>
                                                                             </td>
                                                                         </tr>
 
@@ -239,8 +241,8 @@
                                                                 </div>
                                                                 
 
-                                                            <div ng-show="task.id == null"> 
-                                                                <div class="form-group error">
+                                                            <div > 
+                                                                <div class="form-group error" ng-show="task.id == null">
                                                                     <label for="description" class="col-sm-3 control-label">Task Description</label>
                                                                     <div class="col-sm-9">
                                                                         <input type="text" class="form-control has-error" id="description" name="description" placeholder="Task description" value="<%description%>" 
@@ -251,7 +253,7 @@
                                                                 </div>
                                                                 
 
-                                                                <div class="form-group">
+                                                                <div class="form-group" ng-show="task.id == null">
                                                                     <label for="assignee" class="col-sm-3 control-label">Assignee</label>
                                                                     <div class="col-sm-9">
                                                                         <select class="form-control" id="category_id" name="category_id" ng-model="task.assignee" ng-required="true"
@@ -262,17 +264,17 @@
                                                                               ng-show="frmTasks.assignee.$invalid && frmTasks.assignee.$touched">Assignee field is required</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group" ng-show="task.id == null">
                                                                     <label for="due_date" class="col-sm-3 control-label">Due date</label>
-                                                                    <div class="col-sm-9 input-group date">
+                                                                    <div class="col-sm-9 date">
                                                                         <input type="text" data-rel="datepicker" class="form-control has-error date" id="due_date" name="due_date" placeholder="format yyyy-mm-dd hh:mm:ss" value="<%due_date%>" 
                                                                                ng-model="task.due_date" ng-required="true">
                                                                         <span class="alert-danger" 
                                                                               ng-show="frmTasks.due_date.$invalid && frmTasks.due_date.$touched">due date field is required</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="status" class="col-sm-3 control-label">Set task Priority status</label>
+                                                                <div class="form-group" ng-show="task.id == null">
+                                                                    <label for="priority" class="col-sm-3 control-label">Set task Priority status</label>
                                                                     <div class="col-sm-9">
                                                                         <select class="form-control" id="priority" name="priority" ng-model="task.priority" ng-required="true"
                                                                                 <option value="">--Select--</option>
@@ -284,7 +286,7 @@
                                                                               ng-show="frmTasks.priority.$invalid && frmTasks.priority.$touched">priority field is required</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group" ng-show="task.id == null">
                                                                     <label for="notif_users" class="col-sm-3 control-label">Users to be notified</label>
                                                                     <div class="col-sm-9">
                                                                         <select class="form-control" id="notif_users" name="notif_users" ng-model="task.notif_users" multiple
@@ -295,7 +297,7 @@
                                                                               ng-show="frmTasks.notif_users.$invalid && frmTasks.notif_users.$touched">users field is required</span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group" ng-show="task.id == null">
                                                                     <label for="notif_depts" class="col-sm-3 control-label">Dept to be notified</label>
                                                                     <div class="col-sm-9">
                                                                         <select class="form-control form-chosen" id="notif_depts" name="notif_depts" ng-model="task.notif_depts" multiple
@@ -304,7 +306,7 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group error">
+                                                                <div class="form-group error" >
                                                                         <label for="attachment" class="col-sm-3 control-label">Attach file:</label>
                                                                         <div class="col-sm-9">
                                                                             <input type="file" fileread="task.attachment" class="form-control has-error" id="attachment" name="attachment">

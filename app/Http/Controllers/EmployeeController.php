@@ -48,7 +48,7 @@ class EmployeeController extends Controller
         $employee->email = $request->input('email');
         $employee->role_id = $request->input('role_id');
         $employee->dept = $request->input('dept');
-        $employee->password = Hash::make(str_random(8));
+        $employee->password = Hash::make($employee->first_name);
         $employee->save();
         $request->session()->flash('alert-success', 'User was successful added!');
     

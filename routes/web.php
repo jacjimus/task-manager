@@ -71,6 +71,10 @@ Route::post('/task/{id}', 'TasksController@update');
 
 Route::delete('/task/{id}', 'TasksController@destroy');
 
+Route::post('/follow/{id}', 'TasksController@follow');
+
+Route::post('/check-follows/{id}', 'TasksController@check_if_user_follow');
+
 Route::post('/close/{id}', 'TasksController@close');
 
 Route::post('/my_department', 'TasksController@my_dept');

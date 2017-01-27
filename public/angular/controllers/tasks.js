@@ -59,6 +59,15 @@ app.controller('tasksController', function($scope, $http, API_URL) {
                         });
                 $('#comments').modal('show');
                 break;
+            case 'follow':
+                $scope.id = id;
+                $http.post(API_URL + 'follow/' + id)
+                        .success(function(response) {
+                            console.log(response);
+                            $scope.comments = response;
+                            location.reload();
+                        });
+                break;
             case 'view':
                 $scope.form_title = "Task Details";
                 $scope.id = id;
@@ -119,28 +128,16 @@ app.controller('tasksController', function($scope, $http, API_URL) {
         });
     }
     
-   
-
-    //mark notification as read
-    $scope.markAsRead = function(id) {
-        var isConfirmDelete = confirm('Are you sure you want to delete this record?');
-        if (isConfirmDelete) {
-            $http({
-                method: 'DELETE',
-                url: API_URL + 'tasks/' + id
-            }).
-                    success(function(data) {
-                        console.log(data);
-                        location.reload();
-                    }).
-                    error(function(data) {
-                        console.log(data);
-                        alert('Unable to delete');
-                    });
-        } else {
-            return false;
-        }
-    }
+//   
+//    //check if user follows task
+//    $scope.isFollow = function(id) {
+//        $scope.id = id;
+//                $http.post(API_URL + 'check-follows/' + id)
+//                        .success(function(response) {
+//                            console.log(response);
+//                            return response;
+//                            });
+//    }
     //delete record
     $scope.confirmDelete = function(id) {
         var isConfirmDelete = confirm('Are you sure you want to delete this record?');

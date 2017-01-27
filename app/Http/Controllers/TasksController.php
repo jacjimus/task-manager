@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\User;
 use App\Notifications\TaskNotifications;
+use App\Notifications\CommentsNotifications;
 use App\Task_view;
 use Illuminate\Support\Facades\Notification;
 class TasksController extends Controller
@@ -157,6 +158,13 @@ public function sendTaskCreationNotification($users , $task)
 {
            Notification::send($users, new TaskNotifications($task));
 }
+    /*
+     * Send task comments notification
+     */
+public function sendTaskCommentNotification($users , $task)
+{
+           Notification::send($users, new CommentsNotifications($task));
+}
     /**
      * Display the specified resource.
      *
@@ -208,15 +216,41 @@ public function sendTaskCreationNotification($users , $task)
           $comment = new \App\TaskComments;
             if($request->input('attachment') <> "")
                $comment->attachment = $request->input('attachment');  
-            $comment->comment = $request->input('comment');
-            $comment->task_id = $id;
-            $comment->created_by = Auth::user()->id;
-            $comment->save();
+                $comment->comment = $request->input('comment');
+                $comment->task_id = $id;
+                $comment->created_by = Auth::user()->id;
+            if($comment->save()):
+                $followers = \App\TaskFollowers::select('user_id')->where('task_id' , $id)->get();
+                 $this->sendTaskCommentNotification (User::findMany($followers), $task);
+            endif;
         endif;
 
         $request->session()->flash('alert-success', 'Task comment was successful saved!');
     }
-
+    
+    /*
+     * crete a task folow
+     */
+    public function check_if_user_follow(Request $request, $id) {
+        if(\App\TaskFollowers::where('user_id', '=', Auth::User()->id)->where('task_id', '=', $id)->count() > 0)
+                return true;
+            else
+                return false;
+        }
+    /*
+     * crete a task folow
+     */
+    public function follow(Request $request, $id) {
+        $follow = new \App\TaskFollowers;
+        $follow->user_id = Auth::User()->id;
+        $follow->task_id = $id;
+        if(\App\TaskFollowers::where('user_id', '=', $follow->user_id)->where('task_id', '=', $follow->task_id)->count() == 0){
+            $follow->save();
+            $request->session()->flash('alert-success', 'You have been added to the list of task followers successfully');
+            }
+            else
+            $request->session()->flash('alert-warning', 'You already exist in the list of task followers');
+    }
     /**
      * Remove the specified resource from storage.
      *

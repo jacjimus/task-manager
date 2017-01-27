@@ -1,9 +1,13 @@
 
 <li class="dropdown">
+    @if(count(Auth::User()->unreadNotifications) > 0)
     <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
         <i class="glyphicon glyphicon-globe"></i>
+        
         <span class="badge badge-up badge-danger badge-small">{!!count(Auth::User()->unreadNotifications)!!}</span>
-    </a>
+        </a>
+        @endif
+    
     <ul class="dropdown-menu dropdown-notifications pull-right">
         <li class="dropdown-title bg-inverse">Notifications ({!!count(Auth::User()->unreadNotifications)!!})</li>
         @foreach(Auth::User()->unreadNotifications as $notif)
